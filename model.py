@@ -30,34 +30,42 @@ def connect():
     Base.metadata.create_all(engine)
 
 
-def insert(table, **kwargs):
+def insert(table, **attrs):
     with session_scope() as sess:
-        sess.add(table(**kwargs))
+        sess.add(table(**attrs))
 
 
-def get(table, all_=False, **filter_kwargs):
-    filter_clause = and_(*[getattr(table, col_name) == val
-                           for col_name, val in filter_kwargs.iteritems()])
+def _get_filter_clause(table, filter_kwargs):
+    return and_(*[getattr(table, col_name) == val
+                  for col_name, val in filter_kwargs.iteritems()])
+
+
+def _get_filtered_query(session, table, filter_kwargs):
+    return session.query(table).filter(_get_filter_clause(table, filter_kwargs))
+
+
+def get(table, filter_kwargs, all_=False):
     with session_scope() as sess:
-        query = sess.query(table).filter(filter_clause)
+        query = _get_filtered_query(sess, table, filter_kwargs)
         if all_:
             return query.all()
         else:
             return query.first()
 
 
-class Storage(object):
-    _DB_FILE = os.path.join(os.path.dirname(__file__), 'data', 'db.sqlite')
+def update(table, filter_kwargs, new_kwargs):
+    with session_scope() as sess:
+        updating_obj = _get_filtered_query(sess, table, filter_kwargs).one()
+        for col, val in new_kwargs.iteritems():
+            setattr(updating_obj, col, val)
 
-    def __init__(self):
-        self._engine = None
 
-    def connect(self):
-        self._engine = sqlalchemy.create_engine('sqlite:///' + self._DB_FILE)
-        Session.configure(bind=self._engine)
-        Base.metadata.create_all(self._engine)
+def delete(table, filter_kwargs):
+    with session_scope() as sess:
+        _get_filtered_query(sess, table, filter_kwargs).delete()
 
-    def fill_expert(self, user_name, user_link, reviews, vk_link, user_page):
-        with session_scope() as sess:
-            sess.add(FlampExpertsTable(flamp_url=user_link, vk_url=vk_link,
-                                       page=user_page, user_name=user_name, reviews=reviews))
+
+if __name__ == "__main__":
+    connect()
+    # insert(FlampExpertsTable, id_=1, vk_url=u'http://vk.com/id1')
+    delete(FlampExpertsTable, {'id_': 1})

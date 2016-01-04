@@ -23,14 +23,6 @@ class FlampExpertsTable(Base):
     user_name = sqlalchemy.Column(sqlalchemy.Text)
     reviews = sqlalchemy.Column(sqlalchemy.Integer())
 
-    def __init__(self, id_, flamp_url, vk_url, page, user_name, reviews):
-        self.id_ = id_
-        self.flamp_url = flamp_url
-        self.vk_url = vk_url
-        self.page = page
-        self.user_name = user_name
-        self.reviews = reviews
-
 
 class FlampFirmsTable(Base):
     __tablename__ = 'flamp_firms'
