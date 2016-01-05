@@ -1,7 +1,6 @@
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 Session = sessionmaker(expire_on_commit=False)
@@ -34,6 +33,7 @@ class FlampFirmsTable(Base):
     page = sqlalchemy.Column(sqlalchemy.Text)
     category_url = sqlalchemy.Column(sqlalchemy.Text)
     is_food = sqlalchemy.Column(sqlalchemy.Integer)
+    city = sqlalchemy.Column(sqlalchemy.Text)
 
 
 class FlampMarksTable(Base):
@@ -47,3 +47,10 @@ class FlampMarksTable(Base):
                                 sqlalchemy.ForeignKey(FlampFirmsTable.id_))
     mark = sqlalchemy.Column(sqlalchemy.Integer)
     mark_url = sqlalchemy.Column(sqlalchemy.Text)
+
+
+class FoodEkbFirms(Base):
+    __tablename__ = 'food_ekb_firms'
+
+    food_pk = sqlalchemy.Column(sqlalchemy.ForeignKey(FlampFirmsTable.id_),
+                                primary_key=True)
