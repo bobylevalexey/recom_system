@@ -1,7 +1,6 @@
 # coding=utf-8
 import os
 from contextlib import contextmanager
-
 import sqlalchemy
 from sqlalchemy.sql.elements import and_
 
@@ -63,6 +62,13 @@ def update(table, filter_kwargs, new_kwargs):
 def delete(table, filter_kwargs):
     with session_scope() as sess:
         _get_filtered_query(sess, table, filter_kwargs).delete()
+
+
+def iterate_over_table(table, pk_col='id_'):
+    with session_scope() as sess:
+        pk_list = [tup[0] for tup in sess.query(getattr(table, pk_col)).all()]
+    for pk in pk_list:
+        yield get(table, {pk_col: pk})
 
 
 if __name__ == "__main__":

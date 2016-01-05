@@ -33,6 +33,7 @@ class FlampFirmsTable(Base):
     flamp_id = sqlalchemy.Column(sqlalchemy.Text)
     page = sqlalchemy.Column(sqlalchemy.Text)
     category_url = sqlalchemy.Column(sqlalchemy.Text)
+    is_food = sqlalchemy.Column(sqlalchemy.Integer)
 
 
 class FlampMarksTable(Base):
