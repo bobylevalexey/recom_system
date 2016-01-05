@@ -67,5 +67,4 @@ def delete(table, filter_kwargs):
 
 if __name__ == "__main__":
     connect()
-    # insert(FlampExpertsTable, id_=1, vk_url=u'http://vk.com/id1')
-    delete(FlampExpertsTable, {'id_': 1})
+    # delete(FlampExpertsTable, {'id_': 1})
