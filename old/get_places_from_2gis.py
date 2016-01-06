@@ -1,13 +1,12 @@
 # coding:utf8
 import pickle
-import time
-
 import requests
+import time
 import traceback
+
 import bs4
 
 import get_data
-
 
 __author__ = 'alexey'
 
