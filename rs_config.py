@@ -1,3 +1,5 @@
+import os
+
 FOOD_CATEGORIES = [
     'dosug_razvlecheniya_obshhestvennoe_pitanie/kombinaty_pitaniya',
     'dosug_razvlecheniya_obshhestvennoe_pitanie/piccerii',
@@ -15,3 +17,11 @@ FOOD_CATEGORIES = [
     'dosug_razvlecheniya_obshhestvennoe_pitanie/chajjnye_kluby',
     'dosug_razvlecheniya_obshhestvennoe_pitanie/centry_parovykh_koktejjlejj'
 ]
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+
+SVD_TRAIN_SET_FILE = os.path.join(DATA_DIR, 'svd_train.arr')
+SVD_TEST_SET_FILE = os.path.join(DATA_DIR, 'svd_test.arr')
+
+SVD_TRAIN_SET_CSV_FILE = os.path.join(DATA_DIR, 'svd_train.csv')
+SVD_TEST_SET_CSV_FILE = os.path.join(DATA_DIR, 'svd_test.csv')
