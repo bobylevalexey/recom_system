@@ -65,7 +65,6 @@ class RSVD(BaseSVD):
                       for user_id, item_id, r in self.R_matr)
         reg = self.reg * (self.calc_matr_sqr_vals_sum(self.U_matr.values()) +
                           self.calc_matr_sqr_vals_sum(self.V_matr.values()))
-        print sq_rmse, reg
         return 1./2 * (sq_rmse + reg)
 
     def train(self):
@@ -92,7 +91,6 @@ class RSVD(BaseSVD):
             self.V_matr = new_V_matr
 
             new_loss_func_val = self.calc_loss_function()
-            print new_loss_func_val
             dif = cur_loss_func_val - new_loss_func_val
             cur_loss_func_val = new_loss_func_val
             print 'new loss - {}, dif - {}'.format(new_loss_func_val, dif)
