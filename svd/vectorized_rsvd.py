@@ -78,7 +78,7 @@ class RSVD(BaseSVD):
             for user_id, user_vect in self.U_matr.iteritems():
                 new_user_vect = []
                 for k, k_val in enumerate(user_vect):
-                    new_user_vect.append(k_val + self.lrate * self.d_u(
+                    new_user_vect.append(k_val - self.lrate * self.d_u(
                             user_id, k))
                 new_U_matr[user_id] = new_user_vect
 
@@ -86,7 +86,7 @@ class RSVD(BaseSVD):
                 new_item_vect = []
                 for k, k_val in enumerate(item_vect):
                     new_item_vect.append(
-                            k_val + self.lrate * self.d_v(item_id, k))
+                            k_val - self.lrate * self.d_v(item_id, k))
                 new_V_matr[item_id] = new_item_vect
             self.U_matr = new_U_matr
             self.V_matr = new_V_matr
@@ -119,6 +119,6 @@ R = [
     (6, 6, 5)
 ]
 
-model = RSVD(R, 0.0000035, 0.001, 3, 100, -111110.001)
+model = RSVD(R, 0.01, 1.25, 3, 100, 0.001)
 model.train()
 print model.calc_model_rmse()
