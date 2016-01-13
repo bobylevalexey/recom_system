@@ -24,7 +24,6 @@ def save_as_csv(marks_list):
     test_writer = csv.writer(rs_config.SVD_TEST_SET_CSV_FILE)
 
 
-
 if __name__ == "__main__":
     connect()
     R_matrix = np.asarray(get_marks_list_from_db(), dtype=rating_t)

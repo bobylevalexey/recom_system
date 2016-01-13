@@ -103,3 +103,997 @@ RMSE в зависимости от числа факторов при max_epoch
 обращу внимание на промежуток [3, 40].
 
 
+
+(0.001, 0.8345869350324382, 1.4315067016204401)
+(0.006, 0.8306349321080486, 1.4187791522575837)
+(0.011, 0.8605406913933484, 1.4266352310173396)
+(0.016, 0.8559558887644496, 1.4211921179256903)
+(0.021, 0.8698593457761538, 1.4036689507643432)
+(0.026, 0.8705568980780701, 1.4077382386557227)
+(0.031, 0.8880987337222206, 1.4161544085004059)
+(0.036, 0.8862812014902117, 1.400867514739109)
+(0.041, 0.9235973774329346, 1.4043582499062734)
+(0.046, 0.9392607510571535, 1.3928386688429342)
+(0.051, 0.9145060005492814, 1.397126499573954)
+(0.055, 0.9359162600836526, 1.399581085130872)
+(0.060, 0.9395209137340425, 1.3909391795749695)
+(0.065, 0.9362663787620904, 1.3733272652981432)
+(0.071, 0.9567203653786567, 1.398000008373673)
+(0.076, 0.9554780459252065, 1.3777806074288697)
+(0.081, 0.9519464275425177, 1.3736984605744513)
+(0.086, 0.967784726919427, 1.3690075828866306)
+(0.091, 0.9702187230342002, 1.38446187048975)
+(0.096, 0.972090401278859, 1.3896331187446043)]
+
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.0025, test_size=0.3)
+rmse train: 1.03342265329
+rmse test:  1.36632160844
+time:       3.92309308052
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.005, test_size=0.3)
+rmse train: 1.04826131172
+rmse test:  1.3486840939
+time:       2.87489390373
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.001, test_size=0.3)
+rmse train: 0.998087146695
+rmse test:  1.37250405509
+time:       8.52922010422
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.025, test_size=0.3)
+rmse train: 1.08233537237
+rmse test:  1.30926031618
+time:       1.73062396049
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.05, test_size=0.3)
+rmse train: 1.09819517395
+rmse test:  1.30930106825
+time:       1.43001413345
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.1, test_size=0.3)
+rmse train: 1.09850028962
+rmse test:  1.30857574678
+time:       1.43160104752
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.2, test_size=0.3)
+rmse train: 1.11318083152
+rmse test:  1.30132173014
+time:       1.27702188492
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.4, test_size=0.3)
+rmse train: 1.12800109365
+rmse test:  1.2861781009
+time:       1.13817191124
+Results of SVD(r=5, regularizer=0.0025, accuracy=0.8, test_size=0.3)
+rmse train: 1.1239425906
+rmse test:  1.29345553302
+time:       1.15004491806
+Results of SVD(r=5, regularizer=0.005, accuracy=0.0025, test_size=0.3)
+rmse train: 1.03151254468
+rmse test:  1.36133293499
+time:       4.06600880623
+Results of SVD(r=5, regularizer=0.005, accuracy=0.005, test_size=0.3)
+rmse train: 1.04694613275
+rmse test:  1.35074900119
+time:       2.88466286659
+Results of SVD(r=5, regularizer=0.005, accuracy=0.001, test_size=0.3)
+rmse train: 1.00138886169
+rmse test:  1.37886540027
+time:       7.76978611946
+Results of SVD(r=5, regularizer=0.005, accuracy=0.025, test_size=0.3)
+rmse train: 1.07911732868
+rmse test:  1.31977088737
+time:       1.70773386955
+Results of SVD(r=5, regularizer=0.005, accuracy=0.05, test_size=0.3)
+rmse train: 1.10044357543
+rmse test:  1.29791760059
+time:       1.42937302589
+Results of SVD(r=5, regularizer=0.005, accuracy=0.1, test_size=0.3)
+rmse train: 1.10154740465
+rmse test:  1.30272880295
+time:       1.43181395531
+Results of SVD(r=5, regularizer=0.005, accuracy=0.2, test_size=0.3)
+rmse train: 1.11110465799
+rmse test:  1.30051258224
+time:       1.26960992813
+Results of SVD(r=5, regularizer=0.005, accuracy=0.4, test_size=0.3)
+rmse train: 1.12259239508
+rmse test:  1.30100668102
+time:       1.12648081779
+Results of SVD(r=5, regularizer=0.005, accuracy=0.8, test_size=0.3)
+rmse train: 1.12364257145
+rmse test:  1.28983627505
+time:       1.13804388046
+Results of SVD(r=5, regularizer=0.001, accuracy=0.0025, test_size=0.3)
+rmse train: 1.04034484117
+rmse test:  1.35347083753
+time:       4.03097105026
+Results of SVD(r=5, regularizer=0.001, accuracy=0.005, test_size=0.3)
+rmse train: 1.04364028245
+rmse test:  1.35573281441
+time:       3.06684184074
+Results of SVD(r=5, regularizer=0.001, accuracy=0.001, test_size=0.3)
+rmse train: 1.00184018622
+rmse test:  1.38030527058
+time:       7.76942610741
+Results of SVD(r=5, regularizer=0.001, accuracy=0.025, test_size=0.3)
+rmse train: 1.07975791799
+rmse test:  1.32004993837
+time:       1.71324491501
+Results of SVD(r=5, regularizer=0.001, accuracy=0.05, test_size=0.3)
+rmse train: 1.10030467252
+rmse test:  1.30047329469
+time:       1.41358089447
+Results of SVD(r=5, regularizer=0.001, accuracy=0.1, test_size=0.3)
+rmse train: 1.10418911631
+rmse test:  1.29174064309
+time:       1.42389392853
+Results of SVD(r=5, regularizer=0.001, accuracy=0.2, test_size=0.3)
+rmse train: 1.1111896265
+rmse test:  1.30443694025
+time:       1.27440094948
+Results of SVD(r=5, regularizer=0.001, accuracy=0.4, test_size=0.3)
+rmse train: 1.12210698807
+rmse test:  1.29537665967
+time:       1.11993694305
+Results of SVD(r=5, regularizer=0.001, accuracy=0.8, test_size=0.3)
+rmse train: 1.12612712948
+rmse test:  1.28586755936
+time:       1.12336802483
+Results of SVD(r=5, regularizer=0.025, accuracy=0.0025, test_size=0.3)
+rmse train: 1.04310619826
+rmse test:  1.35110863756
+time:       3.87143015862
+Results of SVD(r=5, regularizer=0.025, accuracy=0.005, test_size=0.3)
+rmse train: 1.05120367273
+rmse test:  1.35294808179
+time:       2.83196806908
+Results of SVD(r=5, regularizer=0.025, accuracy=0.001, test_size=0.3)
+rmse train: 1.01039933881
+rmse test:  1.38607394892
+time:       7.33068394661
+Results of SVD(r=5, regularizer=0.025, accuracy=0.025, test_size=0.3)
+rmse train: 1.07712078588
+rmse test:  1.32924703172
+time:       1.69290018082
+Results of SVD(r=5, regularizer=0.025, accuracy=0.05, test_size=0.3)
+rmse train: 1.09255409774
+rmse test:  1.32239255352
+time:       1.40946698189
+Results of SVD(r=5, regularizer=0.025, accuracy=0.1, test_size=0.3)
+rmse train: 1.10154678016
+rmse test:  1.30872218064
+time:       1.41143298149
+Results of SVD(r=5, regularizer=0.025, accuracy=0.2, test_size=0.3)
+rmse train: 1.11468932503
+rmse test:  1.30408428
+time:       1.2720041275
+Results of SVD(r=5, regularizer=0.025, accuracy=0.4, test_size=0.3)
+rmse train: 1.12003332373
+rmse test:  1.31288963921
+time:       1.13007307053
+Results of SVD(r=5, regularizer=0.025, accuracy=0.8, test_size=0.3)
+rmse train: 1.12566421637
+rmse test:  1.30184011993
+time:       1.12592411041
+Results of SVD(r=5, regularizer=0.05, accuracy=0.0025, test_size=0.3)
+rmse train: 1.04581994579
+rmse test:  1.35726019743
+time:       3.84909510612
+Results of SVD(r=5, regularizer=0.05, accuracy=0.005, test_size=0.3)
+rmse train: 1.05830754431
+rmse test:  1.3414773458
+time:       2.85806679726
+Results of SVD(r=5, regularizer=0.05, accuracy=0.001, test_size=0.3)
+rmse train: 1.02212615452
+rmse test:  1.37773516976
+time:       7.04851198196
+Results of SVD(r=5, regularizer=0.05, accuracy=0.025, test_size=0.3)
+rmse train: 1.08807167276
+rmse test:  1.31265321203
+time:       1.71799278259
+Results of SVD(r=5, regularizer=0.05, accuracy=0.05, test_size=0.3)
+rmse train: 1.11011328733
+rmse test:  1.29346480984
+time:       1.4114010334
+Results of SVD(r=5, regularizer=0.05, accuracy=0.1, test_size=0.3)
+rmse train: 1.10036506498
+rmse test:  1.31843601213
+time:       1.41026902199
+Results of SVD(r=5, regularizer=0.05, accuracy=0.2, test_size=0.3)
+rmse train: 1.1235976817
+rmse test:  1.29399736747
+time:       1.2644739151
+Results of SVD(r=5, regularizer=0.05, accuracy=0.4, test_size=0.3)
+rmse train: 1.128200449
+rmse test:  1.30110484643
+time:       1.13357901573
+Results of SVD(r=5, regularizer=0.05, accuracy=0.8, test_size=0.3)
+rmse train: 1.12646559468
+rmse test:  1.29692436131
+time:       1.1251411438
+Results of SVD(r=5, regularizer=0.1, accuracy=0.0025, test_size=0.3)
+rmse train: 1.05936061699
+rmse test:  1.3430092674
+time:       4.08464217186
+Results of SVD(r=5, regularizer=0.1, accuracy=0.005, test_size=0.3)
+rmse train: 1.0658672248
+rmse test:  1.34612952884
+time:       3.01583909988
+Results of SVD(r=5, regularizer=0.1, accuracy=0.001, test_size=0.3)
+rmse train: 1.0385283162
+rmse test:  1.36926195164
+time:       6.64910101891
+Results of SVD(r=5, regularizer=0.1, accuracy=0.025, test_size=0.3)
+rmse train: 1.09641794721
+rmse test:  1.31399345782
+time:       1.70973205566
+Results of SVD(r=5, regularizer=0.1, accuracy=0.05, test_size=0.3)
+rmse train: 1.11743782286
+rmse test:  1.30664788943
+time:       1.41931915283
+Results of SVD(r=5, regularizer=0.1, accuracy=0.1, test_size=0.3)
+rmse train: 1.11197337213
+rmse test:  1.32022112599
+time:       1.43730902672
+Results of SVD(r=5, regularizer=0.1, accuracy=0.2, test_size=0.3)
+rmse train: 1.13103911493
+rmse test:  1.30375564156
+time:       1.27340984344
+Results of SVD(r=5, regularizer=0.1, accuracy=0.4, test_size=0.3)
+rmse train: 1.13723827265
+rmse test:  1.30831715548
+time:       1.12801098824
+Results of SVD(r=5, regularizer=0.1, accuracy=0.8, test_size=0.3)
+rmse train: 1.14029402051
+rmse test:  1.29982751259
+time:       1.12679290771
+Results of SVD(r=5, regularizer=0.2, accuracy=0.0025, test_size=0.3)
+rmse train: 1.07934898281
+rmse test:  1.37010271417
+time:       4.02973198891
+Results of SVD(r=5, regularizer=0.2, accuracy=0.005, test_size=0.3)
+rmse train: 1.09259939289
+rmse test:  1.36072579785
+time:       2.96107697487
+Results of SVD(r=5, regularizer=0.2, accuracy=0.001, test_size=0.3)
+rmse train: 1.0634540164
+rmse test:  1.37558021878
+time:       6.51802396774
+Results of SVD(r=5, regularizer=0.2, accuracy=0.025, test_size=0.3)
+rmse train: 1.11601281841
+rmse test:  1.34416836273
+time:       1.70270085335
+Results of SVD(r=5, regularizer=0.2, accuracy=0.05, test_size=0.3)
+rmse train: 1.13334472428
+rmse test:  1.33743130103
+time:       1.41790986061
+Results of SVD(r=5, regularizer=0.2, accuracy=0.1, test_size=0.3)
+rmse train: 1.14211366997
+rmse test:  1.31743973539
+time:       1.42202591896
+Results of SVD(r=5, regularizer=0.2, accuracy=0.2, test_size=0.3)
+rmse train: 1.15090202329
+rmse test:  1.32471515224
+time:       1.27260112762
+Results of SVD(r=5, regularizer=0.2, accuracy=0.4, test_size=0.3)
+rmse train: 1.15984696862
+rmse test:  1.32646444607
+time:       1.11570692062
+Results of SVD(r=5, regularizer=0.2, accuracy=0.8, test_size=0.3)
+rmse train: 1.15781889062
+rmse test:  1.31279135582
+time:       1.14436101913
+Results of SVD(r=5, regularizer=0.4, accuracy=0.0025, test_size=0.3)
+rmse train: 1.14661185716
+rmse test:  1.4032693511
+time:       3.82995605469
+Results of SVD(r=5, regularizer=0.4, accuracy=0.005, test_size=0.3)
+rmse train: 1.15971246038
+rmse test:  1.39930189735
+time:       2.84418201447
+Results of SVD(r=5, regularizer=0.4, accuracy=0.001, test_size=0.3)
+rmse train: 1.12359279538
+rmse test:  1.41663071489
+time:       5.90599298477
+Results of SVD(r=5, regularizer=0.4, accuracy=0.025, test_size=0.3)
+rmse train: 1.18126282073
+rmse test:  1.37582420936
+time:       1.6999361515
+Results of SVD(r=5, regularizer=0.4, accuracy=0.05, test_size=0.3)
+rmse train: 1.20360227512
+rmse test:  1.36750877692
+time:       1.41869282722
+Results of SVD(r=5, regularizer=0.4, accuracy=0.1, test_size=0.3)
+rmse train: 1.20155141176
+rmse test:  1.36760155341
+time:       1.40837597847
+Results of SVD(r=5, regularizer=0.4, accuracy=0.2, test_size=0.3)
+rmse train: 1.20835555029
+rmse test:  1.37712587745
+time:       1.27749919891
+Results of SVD(r=5, regularizer=0.4, accuracy=0.4, test_size=0.3)
+rmse train: 1.22215172491
+rmse test:  1.36636788344
+time:       1.12747716904
+Results of SVD(r=5, regularizer=0.4, accuracy=0.8, test_size=0.3)
+rmse train: 1.22139538778
+rmse test:  1.36900003556
+time:       1.11510300636
+Results of SVD(r=5, regularizer=0.8, accuracy=0.0025, test_size=0.3)
+rmse train: 1.36564782448
+rmse test:  1.52335543147
+time:       3.12897014618
+Results of SVD(r=5, regularizer=0.8, accuracy=0.005, test_size=0.3)
+rmse train: 1.38391955075
+rmse test:  1.54887210379
+time:       2.41438508034
+Results of SVD(r=5, regularizer=0.8, accuracy=0.001, test_size=0.3)
+rmse train: 1.35541714994
+rmse test:  1.56511907827
+time:       5.88628387451
+Results of SVD(r=5, regularizer=0.8, accuracy=0.025, test_size=0.3)
+rmse train: 1.38393359446
+rmse test:  1.50645173728
+time:       1.56874418259
+Results of SVD(r=5, regularizer=0.8, accuracy=0.05, test_size=0.3)
+rmse train: 1.40381161031
+rmse test:  1.52514349485
+time:       1.40814089775
+Results of SVD(r=5, regularizer=0.8, accuracy=0.1, test_size=0.3)
+rmse train: 1.40620580643
+rmse test:  1.50963569674
+time:       1.27561998367
+Results of SVD(r=5, regularizer=0.8, accuracy=0.2, test_size=0.3)
+rmse train: 1.4071533536
+rmse test:  1.51876673454
+time:       1.12821912766
+Results of SVD(r=5, regularizer=0.8, accuracy=0.4, test_size=0.3)
+rmse train: 1.41265072926
+rmse test:  1.52366419539
+time:       1.13754677773
+Results of SVD(r=5, regularizer=0.8, accuracy=0.8, test_size=0.3)
+rmse train: 1.41577540843
+rmse test:  1.51813189033
+time:       1.13458514214
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.0025, test_size=0.3)
+rmse train: 0.930100852232
+rmse test:  1.38903557442
+time:       10.4840550423
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.005, test_size=0.3)
+rmse train: 1.04809322592
+rmse test:  1.34094113397
+time:       4.80340194702
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.001, test_size=0.3)
+rmse train: 0.787800524174
+rmse test:  1.48402780494
+time:       23.5359680653
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.025, test_size=0.3)
+rmse train: 1.08342248475
+rmse test:  1.31204374217
+time:       3.09522390366
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.05, test_size=0.3)
+rmse train: 1.09045767617
+rmse test:  1.312972288
+time:       2.75704908371
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.1, test_size=0.3)
+rmse train: 1.09979156008
+rmse test:  1.30891849334
+time:       2.58608102798
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.2, test_size=0.3)
+rmse train: 1.11677999846
+rmse test:  1.30412937204
+time:       2.41470384598
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.4, test_size=0.3)
+rmse train: 1.12556690205
+rmse test:  1.29922690667
+time:       2.24019980431
+Results of SVD(r=10, regularizer=0.0025, accuracy=0.8, test_size=0.3)
+rmse train: 1.11966886196
+rmse test:  1.31244851879
+time:       2.2471768856
+Results of SVD(r=10, regularizer=0.005, accuracy=0.0025, test_size=0.3)
+rmse train: 0.926117496221
+rmse test:  1.38654851602
+time:       10.5916259289
+Results of SVD(r=10, regularizer=0.005, accuracy=0.005, test_size=0.3)
+rmse train: 1.04542412791
+rmse test:  1.34985838931
+time:       4.83455085754
+Results of SVD(r=10, regularizer=0.005, accuracy=0.001, test_size=0.3)
+rmse train: 0.802695144155
+rmse test:  1.45801685953
+time:       23.5686202049
+Results of SVD(r=10, regularizer=0.005, accuracy=0.025, test_size=0.3)
+rmse train: 1.07813297521
+rmse test:  1.32931039614
+time:       3.11801099777
+Results of SVD(r=10, regularizer=0.005, accuracy=0.05, test_size=0.3)
+rmse train: 1.0844443476
+rmse test:  1.32940761524
+time:       2.76025605202
+Results of SVD(r=10, regularizer=0.005, accuracy=0.1, test_size=0.3)
+rmse train: 1.1079964746
+rmse test:  1.29910126812
+time:       2.58635997772
+Results of SVD(r=10, regularizer=0.005, accuracy=0.2, test_size=0.3)
+rmse train: 1.12162528611
+rmse test:  1.29659616607
+time:       2.434237957
+Results of SVD(r=10, regularizer=0.005, accuracy=0.4, test_size=0.3)
+rmse train: 1.11996281658
+rmse test:  1.31137445195
+time:       2.27093791962
+Results of SVD(r=10, regularizer=0.005, accuracy=0.8, test_size=0.3)
+rmse train: 1.1253761774
+rmse test:  1.29891701296
+time:       2.54047298431
+Results of SVD(r=10, regularizer=0.001, accuracy=0.0025, test_size=0.3)
+rmse train: 0.923692120136
+rmse test:  1.396329039
+time:       10.4304430485
+Results of SVD(r=10, regularizer=0.001, accuracy=0.005, test_size=0.3)
+rmse train: 1.0433210787
+rmse test:  1.35698740056
+time:       4.83602714539
+Results of SVD(r=10, regularizer=0.001, accuracy=0.001, test_size=0.3)
+rmse train: 0.790992175216
+rmse test:  1.45773736436
+time:       23.701223135
+Results of SVD(r=10, regularizer=0.001, accuracy=0.025, test_size=0.3)
+rmse train: 1.07533816764
+rmse test:  1.33384562523
+time:       3.13273286819
+Results of SVD(r=10, regularizer=0.001, accuracy=0.05, test_size=0.3)
+rmse train: 1.09394012546
+rmse test:  1.3119448229
+time:       2.7672598362
+Results of SVD(r=10, regularizer=0.001, accuracy=0.1, test_size=0.3)
+rmse train: 1.11254579845
+rmse test:  1.29542175062
+time:       2.58788490295
+Results of SVD(r=10, regularizer=0.001, accuracy=0.2, test_size=0.3)
+rmse train: 1.11712115661
+rmse test:  1.29845123803
+time:       2.42022204399
+Results of SVD(r=10, regularizer=0.001, accuracy=0.4, test_size=0.3)
+rmse train: 1.12636652764
+rmse test:  1.29439929948
+time:       2.23917198181
+Results of SVD(r=10, regularizer=0.001, accuracy=0.8, test_size=0.3)
+rmse train: 1.12069466642
+rmse test:  1.3041072333
+time:       2.23795390129
+Results of SVD(r=10, regularizer=0.025, accuracy=0.0025, test_size=0.3)
+rmse train: 0.951552197125
+rmse test:  1.38011968637
+time:       9.87038779259
+Results of SVD(r=10, regularizer=0.025, accuracy=0.005, test_size=0.3)
+rmse train: 1.0453229295
+rmse test:  1.35878786609
+time:       4.78339290619
+Results of SVD(r=10, regularizer=0.025, accuracy=0.001, test_size=0.3)
+rmse train: 0.876018632705
+rmse test:  1.43398062321
+time:       19.4693138599
+Results of SVD(r=10, regularizer=0.025, accuracy=0.025, test_size=0.3)
+rmse train: 1.08781166063
+rmse test:  1.31556302282
+time:       3.09754800797
+Results of SVD(r=10, regularizer=0.025, accuracy=0.05, test_size=0.3)
+rmse train: 1.09796440831
+rmse test:  1.30609900274
+time:       2.75745582581
+Results of SVD(r=10, regularizer=0.025, accuracy=0.1, test_size=0.3)
+rmse train: 1.10979718185
+rmse test:  1.306654804
+time:       2.57295703888
+Results of SVD(r=10, regularizer=0.025, accuracy=0.2, test_size=0.3)
+rmse train: 1.12579979351
+rmse test:  1.29500792091
+time:       2.48701691628
+Results of SVD(r=10, regularizer=0.025, accuracy=0.4, test_size=0.3)
+rmse train: 1.12581061646
+rmse test:  1.30344638199
+time:       2.31148695946
+Results of SVD(r=10, regularizer=0.025, accuracy=0.8, test_size=0.3)
+rmse train: 1.128510353
+rmse test:  1.29440913995
+time:       2.25681185722
+Results of SVD(r=10, regularizer=0.05, accuracy=0.0025, test_size=0.3)
+rmse train: 1.04429089792
+rmse test:  1.35816007783
+time:       6.5330760479
+Results of SVD(r=10, regularizer=0.05, accuracy=0.005, test_size=0.3)
+rmse train: 1.05808476768
+rmse test:  1.33971004554
+time:       4.82073307037
+Results of SVD(r=10, regularizer=0.05, accuracy=0.001, test_size=0.3)
+rmse train: 0.899462272651
+rmse test:  1.41926035218
+time:       17.3960568905
+Results of SVD(r=10, regularizer=0.05, accuracy=0.025, test_size=0.3)
+rmse train: 1.0935824198
+rmse test:  1.31196075228
+time:       3.10358405113
+Results of SVD(r=10, regularizer=0.05, accuracy=0.05, test_size=0.3)
+rmse train: 1.10096920232
+rmse test:  1.31022572691
+time:       2.76357507706
+Results of SVD(r=10, regularizer=0.05, accuracy=0.1, test_size=0.3)
+rmse train: 1.1091616895
+rmse test:  1.3177385667
+time:       2.58910107613
+Results of SVD(r=10, regularizer=0.05, accuracy=0.2, test_size=0.3)
+rmse train: 1.13268163151
+rmse test:  1.29171455226
+time:       2.40116095543
+Results of SVD(r=10, regularizer=0.05, accuracy=0.4, test_size=0.3)
+rmse train: 1.12758604797
+rmse test:  1.30984622361
+time:       2.23556900024
+Results of SVD(r=10, regularizer=0.05, accuracy=0.8, test_size=0.3)
+rmse train: 1.13455710549
+rmse test:  1.29790503415
+time:       2.2452070713
+Results of SVD(r=10, regularizer=0.1, accuracy=0.0025, test_size=0.3)
+rmse train: 1.06067644027
+rmse test:  1.34188424838
+time:       6.31866693497
+Results of SVD(r=10, regularizer=0.1, accuracy=0.005, test_size=0.3)
+rmse train: 1.07102166254
+rmse test:  1.34075449289
+time:       4.65202999115
+Results of SVD(r=10, regularizer=0.1, accuracy=0.001, test_size=0.3)
+rmse train: 0.936437867705
+rmse test:  1.39541987421
+time:       16.7743911743
+Results of SVD(r=10, regularizer=0.1, accuracy=0.025, test_size=0.3)
+rmse train: 1.09761530386
+rmse test:  1.32700877152
+time:       3.09490299225
+Results of SVD(r=10, regularizer=0.1, accuracy=0.05, test_size=0.3)
+rmse train: 1.11149341771
+rmse test:  1.31768646123
+time:       2.75732898712
+Results of SVD(r=10, regularizer=0.1, accuracy=0.1, test_size=0.3)
+rmse train: 1.12111280897
+rmse test:  1.30967259079
+time:       2.58955717087
+Results of SVD(r=10, regularizer=0.1, accuracy=0.2, test_size=0.3)
+rmse train: 1.13441171714
+rmse test:  1.31244400305
+time:       2.43143105507
+Results of SVD(r=10, regularizer=0.1, accuracy=0.4, test_size=0.3)
+rmse train: 1.13974482756
+rmse test:  1.3077186901
+time:       2.24206519127
+Results of SVD(r=10, regularizer=0.1, accuracy=0.8, test_size=0.3)
+rmse train: 1.14547115416
+rmse test:  1.2950230423
+time:       2.23578190804
+Results of SVD(r=10, regularizer=0.2, accuracy=0.0025, test_size=0.3)
+rmse train: 1.0764527428
+rmse test:  1.35605250684
+time:       6.55646014214
+Results of SVD(r=10, regularizer=0.2, accuracy=0.005, test_size=0.3)
+rmse train: 1.08848467652
+rmse test:  1.36963059912
+time:       4.81089997292
+Results of SVD(r=10, regularizer=0.2, accuracy=0.001, test_size=0.3)
+rmse train: 1.01976157726
+rmse test:  1.38646295663
+time:       14.5375490189
+Results of SVD(r=10, regularizer=0.2, accuracy=0.025, test_size=0.3)
+rmse train: 1.12544440358
+rmse test:  1.33549898144
+time:       3.11181998253
+Results of SVD(r=10, regularizer=0.2, accuracy=0.05, test_size=0.3)
+rmse train: 1.13418651446
+rmse test:  1.32381364786
+time:       2.74760007858
+Results of SVD(r=10, regularizer=0.2, accuracy=0.1, test_size=0.3)
+rmse train: 1.14623245365
+rmse test:  1.33159213783
+time:       2.58258104324
+Results of SVD(r=10, regularizer=0.2, accuracy=0.2, test_size=0.3)
+rmse train: 1.1604078037
+rmse test:  1.31472689211
+time:       2.40823292732
+Results of SVD(r=10, regularizer=0.2, accuracy=0.4, test_size=0.3)
+rmse train: 1.16607811762
+rmse test:  1.31382857829
+time:       2.24923205376
+Results of SVD(r=10, regularizer=0.2, accuracy=0.8, test_size=0.3)
+rmse train: 1.16408124857
+rmse test:  1.31918464161
+time:       2.28892111778
+Results of SVD(r=10, regularizer=0.4, accuracy=0.0025, test_size=0.3)
+rmse train: 1.14985377047
+rmse test:  1.40336133722
+time:       6.26839208603
+Results of SVD(r=10, regularizer=0.4, accuracy=0.005, test_size=0.3)
+rmse train: 1.16379801889
+rmse test:  1.39439542538
+time:       4.67402291298
+Results of SVD(r=10, regularizer=0.4, accuracy=0.001, test_size=0.3)
+rmse train: 1.14300795899
+rmse test:  1.39494986448
+time:       9.43660211563
+Results of SVD(r=10, regularizer=0.4, accuracy=0.025, test_size=0.3)
+rmse train: 1.19506850194
+rmse test:  1.36940979892
+time:       3.09809994698
+Results of SVD(r=10, regularizer=0.4, accuracy=0.05, test_size=0.3)
+rmse train: 1.19722675013
+rmse test:  1.36970847326
+time:       2.9408659935
+Results of SVD(r=10, regularizer=0.4, accuracy=0.1, test_size=0.3)
+rmse train: 1.20885225346
+rmse test:  1.36916109692
+time:       2.58748483658
+Results of SVD(r=10, regularizer=0.4, accuracy=0.2, test_size=0.3)
+rmse train: 1.22636030976
+rmse test:  1.3601843904
+time:       2.41251087189
+Results of SVD(r=10, regularizer=0.4, accuracy=0.4, test_size=0.3)
+rmse train: 1.22701378577
+rmse test:  1.36111193447
+time:       2.24722599983
+Results of SVD(r=10, regularizer=0.4, accuracy=0.8, test_size=0.3)
+rmse train: 1.22900996151
+rmse test:  1.35367650924
+time:       2.25008702278
+Results of SVD(r=10, regularizer=0.8, accuracy=0.0025, test_size=0.3)
+rmse train: 1.35631742217
+rmse test:  1.53305972354
+time:       6.07709908485
+Results of SVD(r=10, regularizer=0.8, accuracy=0.005, test_size=0.3)
+rmse train: 1.37816335118
+rmse test:  1.5159422045
+time:       4.27970099449
+Results of SVD(r=10, regularizer=0.8, accuracy=0.001, test_size=0.3)
+rmse train: 1.34807169365
+rmse test:  1.53745581945
+time:       9.47264909744
+Results of SVD(r=10, regularizer=0.8, accuracy=0.025, test_size=0.3)
+rmse train: 1.39403403526
+rmse test:  1.51103695353
+time:       2.91153097153
+Results of SVD(r=10, regularizer=0.8, accuracy=0.05, test_size=0.3)
+rmse train: 1.39986993827
+rmse test:  1.52633685442
+time:       2.75660514832
+Results of SVD(r=10, regularizer=0.8, accuracy=0.1, test_size=0.3)
+rmse train: 1.41507563266
+rmse test:  1.52114206832
+time:       2.42560505867
+Results of SVD(r=10, regularizer=0.8, accuracy=0.2, test_size=0.3)
+rmse train: 1.42033307631
+rmse test:  1.51589338967
+time:       2.23989200592
+Results of SVD(r=10, regularizer=0.8, accuracy=0.4, test_size=0.3)
+rmse train: 1.41382885215
+rmse test:  1.50080868438
+time:       2.24118804932
+Results of SVD(r=10, regularizer=0.8, accuracy=0.8, test_size=0.3)
+rmse train: 1.41483762671
+rmse test:  1.51589986635
+time:       2.24237799644
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.0025, test_size=0.3)
+rmse train: 0.913435207289
+rmse test:  1.40809697291
+time:       13.8634719849
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.005, test_size=0.3)
+rmse train: 1.04904974972
+rmse test:  1.3547315461
+time:       6.91304206848
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.001, test_size=0.3)
+rmse train: 0.704718338088
+rmse test:  1.49481226825
+time:       34.8915641308
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.025, test_size=0.3)
+rmse train: 1.08441009941
+rmse test:  1.32161786407
+time:       4.62242913246
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.05, test_size=0.3)
+rmse train: 1.09200889535
+rmse test:  1.31658656375
+time:       4.45243501663
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.1, test_size=0.3)
+rmse train: 1.10244312599
+rmse test:  1.31620817911
+time:       4.12605905533
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.2, test_size=0.3)
+rmse train: 1.12348227551
+rmse test:  1.29870826127
+time:       3.92168498039
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.4, test_size=0.3)
+rmse train: 1.12676824967
+rmse test:  1.29561474955
+time:       3.65884995461
+Results of SVD(r=15, regularizer=0.0025, accuracy=0.8, test_size=0.3)
+rmse train: 1.12378608552
+rmse test:  1.30492359166
+time:       3.66650414467
+Results of SVD(r=15, regularizer=0.005, accuracy=0.0025, test_size=0.3)
+rmse train: 0.910017170433
+rmse test:  1.39992284992
+time:       13.8623638153
+Results of SVD(r=15, regularizer=0.005, accuracy=0.005, test_size=0.3)
+rmse train: 1.04985938716
+rmse test:  1.34895515384
+time:       6.89332389832
+Results of SVD(r=15, regularizer=0.005, accuracy=0.001, test_size=0.3)
+rmse train: 0.705792513906
+rmse test:  1.49126870973
+time:       35.0834431648
+Results of SVD(r=15, regularizer=0.005, accuracy=0.025, test_size=0.3)
+rmse train: 1.08740829734
+rmse test:  1.31171278765
+time:       4.63776516914
+Results of SVD(r=15, regularizer=0.005, accuracy=0.05, test_size=0.3)
+rmse train: 1.09482156869
+rmse test:  1.3116145887
+time:       4.45531105995
+Results of SVD(r=15, regularizer=0.005, accuracy=0.1, test_size=0.3)
+rmse train: 1.10591653228
+rmse test:  1.31093117624
+time:       4.04748106003
+Results of SVD(r=15, regularizer=0.005, accuracy=0.2, test_size=0.3)
+rmse train: 1.12023815699
+rmse test:  1.30516000778
+time:       3.8639421463
+Results of SVD(r=15, regularizer=0.005, accuracy=0.4, test_size=0.3)
+rmse train: 1.12591429528
+rmse test:  1.29868485306
+time:       3.75262308121
+Results of SVD(r=15, regularizer=0.005, accuracy=0.8, test_size=0.3)
+rmse train: 1.12054728862
+rmse test:  1.31173889957
+time:       3.93933916092
+Results of SVD(r=15, regularizer=0.001, accuracy=0.0025, test_size=0.3)
+rmse train: 0.898451836406
+rmse test:  1.4195199437
+time:       14.0222649574
+Results of SVD(r=15, regularizer=0.001, accuracy=0.005, test_size=0.3)
+rmse train: 1.05548690631
+rmse test:  1.33481660858
+time:       6.8325920105
+Results of SVD(r=15, regularizer=0.001, accuracy=0.001, test_size=0.3)
+rmse train: 0.703203288219
+rmse test:  1.48189781343
+time:       35.6170151234
+Results of SVD(r=15, regularizer=0.001, accuracy=0.025, test_size=0.3)
+rmse train: 1.08344655805
+rmse test:  1.3138155205
+time:       4.77133107185
+Results of SVD(r=15, regularizer=0.001, accuracy=0.05, test_size=0.3)
+rmse train: 1.08773705471
+rmse test:  1.31873100831
+time:       4.54102492332
+Results of SVD(r=15, regularizer=0.001, accuracy=0.1, test_size=0.3)
+rmse train: 1.10804182501
+rmse test:  1.30936427754
+time:       4.06872701645
+Results of SVD(r=15, regularizer=0.001, accuracy=0.2, test_size=0.3)
+rmse train: 1.12353686204
+rmse test:  1.30018456733
+time:       3.84785604477
+Results of SVD(r=15, regularizer=0.001, accuracy=0.4, test_size=0.3)
+rmse train: 1.12615309796
+rmse test:  1.30168636828
+time:       3.66112709045
+Results of SVD(r=15, regularizer=0.001, accuracy=0.8, test_size=0.3)
+rmse train: 1.13394677029
+rmse test:  1.29010529425
+time:       3.70695614815
+Results of SVD(r=15, regularizer=0.025, accuracy=0.0025, test_size=0.3)
+rmse train: 0.927232560342
+rmse test:  1.403889765
+time:       13.7588031292
+Results of SVD(r=15, regularizer=0.025, accuracy=0.005, test_size=0.3)
+rmse train: 1.05337782292
+rmse test:  1.345588575
+time:       6.8321480751
+Results of SVD(r=15, regularizer=0.025, accuracy=0.001, test_size=0.3)
+rmse train: 0.783721937102
+rmse test:  1.45151745025
+time:       29.6068358421
+Results of SVD(r=15, regularizer=0.025, accuracy=0.025, test_size=0.3)
+rmse train: 1.09178387661
+rmse test:  1.3158745064
+time:       4.6642999649
+Results of SVD(r=15, regularizer=0.025, accuracy=0.05, test_size=0.3)
+rmse train: 1.10215104623
+rmse test:  1.30919567419
+time:       4.47335100174
+Results of SVD(r=15, regularizer=0.025, accuracy=0.1, test_size=0.3)
+rmse train: 1.10985645171
+rmse test:  1.30966969476
+time:       4.12597298622
+Results of SVD(r=15, regularizer=0.025, accuracy=0.2, test_size=0.3)
+rmse train: 1.12748223533
+rmse test:  1.2982987498
+time:       3.86072087288
+Results of SVD(r=15, regularizer=0.025, accuracy=0.4, test_size=0.3)
+rmse train: 1.13079251753
+rmse test:  1.29987567771
+time:       3.68219304085
+Results of SVD(r=15, regularizer=0.025, accuracy=0.8, test_size=0.3)
+rmse train: 1.13315843313
+rmse test:  1.29677918871
+time:       3.64963006973
+Results of SVD(r=15, regularizer=0.05, accuracy=0.0025, test_size=0.3)
+rmse train: 0.936432187824
+rmse test:  1.39446288861
+time:       13.6341209412
+Results of SVD(r=15, regularizer=0.05, accuracy=0.005, test_size=0.3)
+rmse train: 1.06761604404
+rmse test:  1.32374286882
+time:       6.98634505272
+Results of SVD(r=15, regularizer=0.05, accuracy=0.001, test_size=0.3)
+rmse train: 0.807449024143
+rmse test:  1.43769037555
+time:       29.7274930477
+Results of SVD(r=15, regularizer=0.05, accuracy=0.025, test_size=0.3)
+rmse train: 1.09130134822
+rmse test:  1.32158787126
+time:       4.64209198952
+Results of SVD(r=15, regularizer=0.05, accuracy=0.05, test_size=0.3)
+rmse train: 1.10446338654
+rmse test:  1.31750494605
+time:       4.45902490616
+Results of SVD(r=15, regularizer=0.05, accuracy=0.1, test_size=0.3)
+rmse train: 1.11743353904
+rmse test:  1.31159144808
+time:       4.06908607483
+Results of SVD(r=15, regularizer=0.05, accuracy=0.2, test_size=0.3)
+rmse train: 1.12516290054
+rmse test:  1.31379074673
+time:       3.92278289795
+Results of SVD(r=15, regularizer=0.05, accuracy=0.4, test_size=0.3)
+rmse train: 1.13441652388
+rmse test:  1.30320581862
+time:       3.65356492996
+Results of SVD(r=15, regularizer=0.05, accuracy=0.8, test_size=0.3)
+rmse train: 1.13126379057
+rmse test:  1.31067466529
+time:       3.65860319138
+Results of SVD(r=15, regularizer=0.1, accuracy=0.0025, test_size=0.3)
+rmse train: 1.04684971096
+rmse test:  1.36944505057
+time:       9.04543304443
+Results of SVD(r=15, regularizer=0.1, accuracy=0.005, test_size=0.3)
+rmse train: 1.07093889711
+rmse test:  1.34647684308
+time:       6.81857609749
+Results of SVD(r=15, regularizer=0.1, accuracy=0.001, test_size=0.3)
+rmse train: 0.890766472429
+rmse test:  1.4168447844
+time:       26.3532660007
+Results of SVD(r=15, regularizer=0.1, accuracy=0.025, test_size=0.3)
+rmse train: 1.10116133035
+rmse test:  1.32741918903
+time:       4.64179396629
+Results of SVD(r=15, regularizer=0.1, accuracy=0.05, test_size=0.3)
+rmse train: 1.11601611904
+rmse test:  1.31429291503
+time:       4.44048500061
+Results of SVD(r=15, regularizer=0.1, accuracy=0.1, test_size=0.3)
+rmse train: 1.12455199065
+rmse test:  1.31796183747
+time:       4.07948112488
+Results of SVD(r=15, regularizer=0.1, accuracy=0.2, test_size=0.3)
+rmse train: 1.13896368252
+rmse test:  1.31355586808
+time:       3.84707093239
+Results of SVD(r=15, regularizer=0.1, accuracy=0.4, test_size=0.3)
+rmse train: 1.14063007428
+rmse test:  1.31461514749
+time:       3.71605396271
+Results of SVD(r=15, regularizer=0.1, accuracy=0.8, test_size=0.3)
+rmse train: 1.13874014813
+rmse test:  1.30857877546
+time:       3.6985809803
+Results of SVD(r=15, regularizer=0.2, accuracy=0.0025, test_size=0.3)
+rmse train: 1.08265541987
+rmse test:  1.35736549098
+time:       9.06082582474
+Results of SVD(r=15, regularizer=0.2, accuracy=0.005, test_size=0.3)
+rmse train: 1.09790507778
+rmse test:  1.33779153723
+time:       7.01826000214
+Results of SVD(r=15, regularizer=0.2, accuracy=0.001, test_size=0.3)
+rmse train: 0.96979650217
+rmse test:  1.39826850846
+time:       21.6855380535
+Results of SVD(r=15, regularizer=0.2, accuracy=0.025, test_size=0.3)
+rmse train: 1.12722034416
+rmse test:  1.3293297864
+time:       4.93769907951
+Results of SVD(r=15, regularizer=0.2, accuracy=0.05, test_size=0.3)
+rmse train: 1.14229262117
+rmse test:  1.32315689886
+time:       4.45326304436
+Results of SVD(r=15, regularizer=0.2, accuracy=0.1, test_size=0.3)
+rmse train: 1.14600454435
+rmse test:  1.32689760518
+time:       4.04079508781
+Results of SVD(r=15, regularizer=0.2, accuracy=0.2, test_size=0.3)
+rmse train: 1.15993687762
+rmse test:  1.32206081018
+time:       3.85556912422
+Results of SVD(r=15, regularizer=0.2, accuracy=0.4, test_size=0.3)
+rmse train: 1.16344476136
+rmse test:  1.32522359146
+time:       3.68037605286
+Results of SVD(r=15, regularizer=0.2, accuracy=0.8, test_size=0.3)
+rmse train: 1.1641535186
+rmse test:  1.31687722751
+time:       3.97864103317
+Results of SVD(r=15, regularizer=0.4, accuracy=0.0025, test_size=0.3)
+rmse train: 1.14800555186
+rmse test:  1.39186668755
+time:       8.72555685043
+Results of SVD(r=15, regularizer=0.4, accuracy=0.005, test_size=0.3)
+rmse train: 1.15916485722
+rmse test:  1.38076772354
+time:       6.82516694069
+Results of SVD(r=15, regularizer=0.4, accuracy=0.001, test_size=0.3)
+rmse train: 1.13072122657
+rmse test:  1.41423154289
+time:       13.1592509747
+Results of SVD(r=15, regularizer=0.4, accuracy=0.025, test_size=0.3)
+rmse train: 1.19509805865
+rmse test:  1.36210114174
+time:       4.84486413002
+Results of SVD(r=15, regularizer=0.4, accuracy=0.05, test_size=0.3)
+rmse train: 1.20919338162
+rmse test:  1.36379904879
+time:       4.47660899162
+Results of SVD(r=15, regularizer=0.4, accuracy=0.1, test_size=0.3)
+rmse train: 1.21717650906
+rmse test:  1.36736154928
+time:       4.12088704109
+Results of SVD(r=15, regularizer=0.4, accuracy=0.2, test_size=0.3)
+rmse train: 1.22150537112
+rmse test:  1.36981598948
+time:       3.84316396713
+Results of SVD(r=15, regularizer=0.4, accuracy=0.4, test_size=0.3)
+rmse train: 1.22502471036
+rmse test:  1.36986649856
+time:       3.6457490921
+Results of SVD(r=15, regularizer=0.4, accuracy=0.8, test_size=0.3)
+rmse train: 1.22290601752
+rmse test:  1.36733375033
+time:       3.66288685799
+Results of SVD(r=15, regularizer=0.8, accuracy=0.0025, test_size=0.3)
+rmse train: 1.35690112624
+rmse test:  1.52932115742
+time:       8.417345047
+Results of SVD(r=15, regularizer=0.8, accuracy=0.005, test_size=0.3)
+rmse train: 1.37997374628
+rmse test:  1.5350451562
+time:       6.54102802277
+Results of SVD(r=15, regularizer=0.8, accuracy=0.001, test_size=0.3)
+rmse train: 1.34808226157
+rmse test:  1.52619737437
+time:       13.8706078529
+Results of SVD(r=15, regularizer=0.8, accuracy=0.025, test_size=0.3)
+rmse train: 1.39854924703
+rmse test:  1.52439336021
+time:       4.87189006805
+Results of SVD(r=15, regularizer=0.8, accuracy=0.05, test_size=0.3)
+rmse train: 1.40526988298
+rmse test:  1.50801042248
+time:       4.04963994026
+Results of SVD(r=15, regularizer=0.8, accuracy=0.1, test_size=0.3)
+rmse train: 1.41117123176
+rmse test:  1.51011896329
+time:       3.86739301682
+Results of SVD(r=15, regularizer=0.8, accuracy=0.2, test_size=0.3)
+rmse train: 1.4150267698
+rmse test:  1.51966832544
+time:       3.71452212334
+Results of SVD(r=15, regularizer=0.8, accuracy=0.4, test_size=0.3)
+rmse train: 1.42268511303
+rmse test:  1.50901037365
+time:       3.668394804
+Results of SVD(r=15, regularizer=0.8, accuracy=0.8, test_size=0.3)
+rmse train: 1.41872868583
+rmse test:  1.51966833953
+time:       3.66787695885
