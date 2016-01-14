@@ -1,6 +1,9 @@
 # coding=utf-8
 from copy import deepcopy
 
+import numpy as np
+import time
+
 from base import BaseSVD
 
 
@@ -8,51 +11,57 @@ def _dot_product(v1, v2):
     return sum(v1i * v2i for v1i, v2i in zip(v1, v2))
 
 
-class RSVD(BaseSVD):
+class VectorizedRSVD(BaseSVD):
     def __init__(self, marks_list, lrate, reg, r, max_epochs, acc):
+        self.user_indexes = None
+        self.item_indexes = None
+
         self.U_matr = None
         self.V_matr = None
         self.R_matr = None
-        super(RSVD, self).__init__(
+        self.M_matr = None
+        super(VectorizedRSVD, self).__init__(
                 marks_list, lrate, reg, r, max_epochs, acc)
 
+    def init_user_and_item_indexes(self, marks):
+        self.user_indexes = {}
+        self.item_indexes = {}
+        u_idx = i_idx = 0
+        for user_id, item_id, mark in marks:
+            if user_id not in self.user_indexes:
+                self.user_indexes[user_id] = u_idx
+                u_idx += 1
+            if item_id not in self.item_indexes:
+                self.item_indexes[item_id] = i_idx
+                i_idx += 1
+
+    def create_matr(self, n, m, init_val, dtype=None):
+        matr = np.empty((n, m), dtype)
+        matr.fill(init_val)
+        return matr
+
     def init_model(self, marks):
-        self.U_matr = {}
-        self.V_matr = {}
-        self.R_matr = deepcopy(marks)
+        self.init_user_and_item_indexes(marks)
+
+        self.U_matr = self.create_matr(
+                len(self.user_indexes), self.r, 0.5, float)
+        self.V_matr = self.create_matr(
+                len(self.item_indexes), self.r, 0.5, float)
+        self.R_matr = np.zeros((len(self.user_indexes), len(self.item_indexes)))
+        self.M_matr = np.zeros((len(self.user_indexes), len(self.item_indexes)))
 
         for user_id, item_id, mark in marks:
-            if user_id not in self.U_matr:
-                # todo придумать умное начальное значение, а не 1
-                self.U_matr[user_id] = [0.5] * self.r
-            if item_id not in self.V_matr:
-                # todo придумать умное начальное значение, а не 1
-                self.V_matr[item_id] = [0.5] * self.r
-
-    def d_u(self, user_id, k):
-        err = 0
-        p_ik = self.U_matr[user_id][k]
-        for user_id_, item_id, mark in self.R_matr:
-            if user_id != user_id_:
-                continue
-            q_jk = self.V_matr[item_id][k]
-            err += (mark - p_ik * q_jk) * (-q_jk)
-        return err + self.reg * p_ik
+            u_idx = self.user_indexes[user_id]
+            i_idx = self.item_indexes[item_id]
+            self.R_matr[u_idx, i_idx] = mark
+            self.M_matr[u_idx, i_idx] = 1
 
     def predict(self, user_id, item_id):
-        if user_id not in self.U_matr or item_id not in self.V_matr:
-            return
-        return _dot_product(self.U_matr[user_id], self.V_matr[item_id])
-
-    def d_v(self, item_id, k):
-        err = 0
-        q_jk = self.V_matr[item_id][k]
-        for user_id, item_id_, mark in self.R_matr:
-            if item_id != item_id_:
-                continue
-            p_ik = self.U_matr[user_id][k]
-            err += (mark - p_ik * q_jk) * (-p_ik)
-        return err + self.reg * q_jk
+        try:
+            return np.dot(self.U_matr[self.user_indexes[user_id]],
+                          self.V_matr[self.item_indexes[item_id]])
+        except KeyError:
+            pass
 
     def calc_model_rmse(self):
         return self.calc_rmse(self.R_matr)
@@ -61,41 +70,58 @@ class RSVD(BaseSVD):
         return sum(sum(k ** 2 for k in vect) for vect in matr)
 
     def calc_loss_function(self):
-        sq_rmse = sum((r - self.predict(user_id, item_id)) ** 2
-                      for user_id, item_id, r in self.R_matr)
-        reg = self.reg * (self.calc_matr_sqr_vals_sum(self.U_matr.values()) +
-                          self.calc_matr_sqr_vals_sum(self.V_matr.values()))
+        sq_rmse = (self.R_matr - self.U_matr.dot(self.V_matr.transpose())) ** 2
+        reg = self.reg * ((self.U_matr ** 2 + self.V_matr**2).sum())
         return 1./2 * (sq_rmse + reg)
+
+    def d_U(self):
+        a1 = - self.V_matr.transpose().dot(self.R_matr.transpose())
+        a2 = (self.V_matr * self.V_matr).transpose().dot(
+                self.M_matr.transpose()) * self.U_matr.transpose()
+        a3 = self.reg * self.U_matr.transpose()
+        return (a1 + a2 + a3).transpose()
+
+    def d_V(self):
+        a1 = - self.U_matr.transpose().dot(self.R_matr.transpose())
+        a2 = (self.U_matr * self.U_matr).transpose().dot(
+                self.M_matr.transpose()) * self.V_matr.transpose()
+        a3 = self.reg * self.V_matr.transpose()
+        return (a1 + a2 + a3).transpose()
 
     def train(self):
         cur_loss_func_val = 10000000
         for epoch_num in xrange(self.max_epochs):
             print 'epoch {}. cur loss - {}'.format(epoch_num + 1,
                                                    cur_loss_func_val)
-            new_U_matr = {}
-            new_V_matr = {}
-            for user_id, user_vect in self.U_matr.iteritems():
-                new_user_vect = []
-                for k, k_val in enumerate(user_vect):
-                    new_user_vect.append(k_val - self.lrate * self.d_u(
-                            user_id, k))
-                new_U_matr[user_id] = new_user_vect
+            new_U_matr = self.U_matr - self.lrate * self.d_U()
+            new_V_matr = self.V_matr - self.lrate * self.d_V()
 
-            for item_id, item_vect in self.V_matr.iteritems():
-                new_item_vect = []
-                for k, k_val in enumerate(item_vect):
-                    new_item_vect.append(
-                            k_val - self.lrate * self.d_v(item_id, k))
-                new_V_matr[item_id] = new_item_vect
             self.U_matr = new_U_matr
             self.V_matr = new_V_matr
+
+
+            # for user_id, user_vect in self.U_matr.iteritems():
+            #     new_user_vect = []
+            #     for k, k_val in enumerate(user_vect):
+            #         new_user_vect.append(k_val - self.lrate * self.d_u(
+            #                 user_id, k))
+            #     new_U_matr[user_id] = new_user_vect
+            #
+            # for item_id, item_vect in self.V_matr.iteritems():
+            #     new_item_vect = []
+            #     for k, k_val in enumerate(item_vect):
+            #         new_item_vect.append(
+            #                 k_val - self.lrate * self.d_v(item_id, k))
+            #     new_V_matr[item_id] = new_item_vect
+            # self.U_matr = new_U_matr
+            # self.V_matr = new_V_matr
 
             new_loss_func_val = self.calc_loss_function()
             dif = cur_loss_func_val - new_loss_func_val
             cur_loss_func_val = new_loss_func_val
             print 'new loss - {}, dif - {}'.format(new_loss_func_val, dif)
             print
-            if dif < self.acc:
+            if abs(dif) < self.acc:
                 break
 
 
