@@ -4,15 +4,15 @@ from copy import deepcopy
 import numpy as np
 import time
 
-from base import BaseSVD
+from svd.base import BaseRSVD
 
 
 def _dot_product(v1, v2):
     return sum(v1i * v2i for v1i, v2i in zip(v1, v2))
 
 
-class VectorizedRSVD(BaseSVD):
-    def __init__(self, marks_list, lrate, reg, r, max_epochs, acc):
+class VectorizedRSVD(BaseRSVD):
+    def __init__(self, marks_list, lrate, reg, factors_num, max_epochs, acc):
         self.user_indexes = None
         self.item_indexes = None
 
@@ -21,7 +21,7 @@ class VectorizedRSVD(BaseSVD):
         self.R_matr = None
         self.M_matr = None
         super(VectorizedRSVD, self).__init__(
-                marks_list, lrate, reg, r, max_epochs, acc)
+                marks_list, lrate, reg, factors_num, max_epochs, acc)
 
     def init_user_and_item_indexes(self, marks):
         self.user_indexes = {}
@@ -44,9 +44,9 @@ class VectorizedRSVD(BaseSVD):
         self.init_user_and_item_indexes(marks)
 
         self.U_matr = self.create_matr(
-                len(self.user_indexes), self.r, 0.5, float)
+                len(self.user_indexes), self.factors_num, 0.5, float)
         self.V_matr = self.create_matr(
-                len(self.item_indexes), self.r, 0.5, float)
+                len(self.item_indexes), self.factors_num, 0.5, float)
         self.R_matr = np.zeros((len(self.user_indexes), len(self.item_indexes)))
         self.M_matr = np.zeros((len(self.user_indexes), len(self.item_indexes)))
 

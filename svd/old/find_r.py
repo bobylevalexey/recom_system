@@ -2,7 +2,7 @@ import time
 
 from model import connect
 from svd.create_svd_input import get_marks_list_from_db
-from svd.regularizedSVD import SvdMatrix
+from svd.old.regularizedSVD import SvdMatrix
 
 if __name__ == "__main__":
     #========= test SvdMatrix class on smallest MovieLENS dataset =========
