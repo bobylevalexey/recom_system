@@ -81,7 +81,7 @@ if __name__ == "__main__":
     marks_avg = sum(m for u_id, i_id, m in marks) / float(len(marks))
 
     lrate = 0.009
-    acc = 10
+    acc = 1
     reg = 0.1
     factors_num = 10
     max_epochs = 5000
