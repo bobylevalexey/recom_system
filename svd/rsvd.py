@@ -6,7 +6,6 @@ import math
 from sklearn.cross_validation import train_test_split
 
 from base import DictModel
-from svd.utils import frange
 
 
 class RSVD(object):
@@ -48,9 +47,6 @@ class RSVD(object):
                    for vect in model.U_matr.values())
 
     def train(self, model, marks):
-        """
-        Trains the entire U matrix and the entire V (and V^T) matrix
-        """
         self._train_model = deepcopy(model)
         self._train_marks = marks
 
@@ -74,9 +70,11 @@ class RSVD(object):
         return self._train_model
 
 if __name__ == "__main__":
+    import time
+
     from create_svd_input import get_marks_list_from_db
     from model import connect
-    import time
+    from svd.utils import frange
 
     connect()
     logging.basicConfig(level=logging.INFO)
