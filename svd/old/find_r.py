@@ -12,7 +12,7 @@ if __name__ == "__main__":
     results = []
     for i in xrange(1, 40):
         init = time.time()
-        svd = SvdMatrix(r_matr, r=i)
+        svd = SvdMatrix(r_matr, factors_num=i)
         svd.trainratings()
         results.append((svd.calcrmse(svd.trainrats), svd.calcrmse(svd.testrats)))
         print "rmsetrain: ", results[-1][0]

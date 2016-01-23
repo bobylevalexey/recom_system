@@ -1,93 +1,118 @@
 # coding=utf-8
 import logging
-import functools
 from copy import deepcopy
 
-from base import BaseRSVD, DictModel
-from svd.utils import sqrt_avg_by_factors
+import math
+from sklearn.cross_validation import train_test_split
+
+from base import DictModel
+from svd.utils import frange
 
 
-class BruteRSVD(BaseRSVD):
-    LOGGER = logging.getLogger('brute_rsvd')
+class RSVD(object):
+    def __init__(self, lrate=0.035, reg=0.01, max_epochs=30, acc=0.001,
+                 glob_epochs=1, deep_copy=False):
+        self.lrate = lrate
+        self.reg = reg
+        self.acc = acc
+        self.max_epochs = max_epochs
+        self.glob_epochs = glob_epochs
+        self.deep_copy = deep_copy
 
-    def train_epoch(self, model):
+        # tmp variables
+        self._train_marks = None
+        self._train_model = None
+
+    def train_k_factor(self, k):
+        sse = 0.0
+        if self.deep_copy:
+            new_model = deepcopy(self._train_model)
+        else:
+            new_model = self._train_model
+        for user_id, item_id, mark in self._train_marks:
+            err = mark - new_model.predict(user_id, item_id)
+            sse += err**2
+
+            old_pik = new_model.U_matr[user_id][k]
+            old_qjk = new_model.V_matr[item_id][k]
+
+            new_model.U_matr[user_id][k] += \
+                self.lrate * (err * old_qjk - self.reg * old_pik)
+            new_model.V_matr[item_id][k] += \
+                self.lrate * (err * old_pik - self.reg * old_qjk)
+        return new_model, sse + self.reg * (self.matr_sqr_sum(new_model.U_matr) +
+                                            self.matr_sqr_sum(new_model.V_matr))
+
+    def matr_sqr_sum(self, matr):
+        return sum(sum(fact**2 for fact in vect)
+                   for vect in model.U_matr.values())
+
+    def train(self, model, marks):
         """
-        :param model: DictModel
-        :param marks: (user_id, item_id, mark)
+        Trains the entire U matrix and the entire V (and V^T) matrix
         """
-        new_model = DictModel(model.factors_num)
-        for user_id, user_vect in model.U_matr.iteritems():
-            new_user_vect = []
-            for k, k_val in enumerate(user_vect):
-                new_user_vect.append(
-                        k_val - self.lrate * self.d_uk(user_id, k, model))
-            new_model.U_matr[user_id] = new_user_vect
+        self._train_model = deepcopy(model)
+        self._train_marks = marks
 
-        for item_id, item_vect in model.V_matr.iteritems():
-            new_item_vect = []
-            for k, k_val in enumerate(item_vect):
-                new_item_vect.append(
-                        k_val - self.lrate * self.d_vk(item_id, k, model))
-            new_model.V_matr[item_id] = new_item_vect
+        old_loss = float('inf')
+        for glob_epoch in xrange(self.glob_epochs):
+            print "glob epoch=", glob_epoch
+            for k in range(self._train_model.factors_num):
+                print "k=", k
+                for epoch in range(self.max_epochs):
+                    new_model, new_loss = self.train_k_factor(k)
 
-        return new_model
+                    print "epoch=", epoch, "; dif=", old_loss - new_loss, \
+                        "; loss=", new_loss
+                    # check if train error is still changing
+                    if old_loss - new_loss < self.acc:
+                        print 'stoping'
+                        break
+                    self._train_model = new_model
+                    old_loss = new_loss
 
-
-class StohasticRSVD(BruteRSVD):
-    def __init__(self, lrate, reg, max_epochs, acc, lrate_decr_coef,
-                 max_fact_epochs):
-        super(StohasticRSVD, self).__init__(lrate, reg, max_epochs, acc,
-                                            lrate_decr_coef)
-        self.max_fact_epochs = max_fact_epochs
-
-    def train_epoch(self, model):
-        for k in xrange(model.factors_num):
-            model = self.train_k_factor(model, k)
-        return model
-
-    def train_k_factor(self, model, k):
-        cur_loss = self.calc_loss_function(model)
-        for fact_epoch in xrange(self.max_fact_epochs):
-            self.LOGGER.info('factor {}: epoch {}: cur loss {}'.format(
-                    k, fact_epoch, cur_loss))
-
-            new_model = deepcopy(model)
-            for user_id in model.U_matr:
-                old_val = new_model.U_matr[user_id][k]
-                new_model.U_matr[user_id][k] = \
-                    old_val - self.lrate * self.d_uk(user_id, k, model)
-
-            for item_id in model.V_matr:
-                old_val = new_model.V_matr[item_id][k]
-                new_model.V_matr[item_id][k] = \
-                    old_val - self.lrate * self.d_vk(item_id, k, model)
-
-            new_loss = self.calc_loss_function(new_model)
-            dif = cur_loss - new_loss
-            cur_loss = new_loss
-            self.LOGGER.info(
-                'new loss {}, dif {}'.format(new_loss, dif))
-            if dif < 0:
-                self.lrate *= self.lrate_decr_coef
-                self.LOGGER.warning('{} factor: decreasing lrate'.format(k))
-                continue
-            model = new_model
-            if dif < self.acc:
-                break
-        return model
+        return self._train_model
 
 if __name__ == "__main__":
-    from svd.test_data import R
+    from create_svd_input import get_marks_list_from_db
+    from model import connect
+    import time
+
+    connect()
     logging.basicConfig(level=logging.INFO)
 
-    svd = StohasticRSVD(lrate=0.001, reg=0, max_epochs=100,
-                        acc=0.001, max_fact_epochs=400, lrate_decr_coef=0.4)
-    # svd = BruteRSVD(lrate=0.01, reg=0.1, max_epochs=400,
-    #                 acc=0.01)
-    model = DictModel(2).with_val(1).init_from_marks_list(R)
-            # sqrt_avg_by_factors(R, 2)).init_from_marks_list(R)
+    lrate = 0.009
+    acc = 10
+    reg = 0.1
+    factors_num = 10
+    max_epochs = 5000
+    train_size = 0.7
+    init_val = math.sqrt(3. / factors_num)
+    deep_copy = True
+    glob_epochs = 1
 
-    new_model = svd.train(model, R)
-    print new_model.calc_rmse(R), model.calc_rmse(R)
+    marks = get_marks_list_from_db()
+    train, test = train_test_split(marks, train_size=train_size)
+    model = DictModel(factors_num).with_val(
+        math.sqrt(3. / factors_num)).init_from_marks_list(train)
 
+    results = []
+    for glob_epochs in xrange(1, 10, 1):
+        svd = RSVD(reg=reg, acc=acc, lrate=lrate, max_epochs=max_epochs,
+                   deep_copy=deep_copy, glob_epochs=glob_epochs)
+        st = time.time()
+        tr_model = svd.train(model, train)
+        report = {
+            'lrate': lrate,
+            'acc': acc,
+            'reg': reg,
+            'fn': factors_num,
+            'dp': int(deep_copy),
+            'train': "%.5f" % tr_model.calc_rmse(train),
+            'test': "%.5f" % tr_model.calc_rmse(test),
+        }
+        results.append(report)
 
+        print 'res', report
+    for res in results:
+        print res
