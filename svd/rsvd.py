@@ -70,47 +70,30 @@ class RSVD(object):
         return self._train_model
 
 if __name__ == "__main__":
-    import time
+    import os
 
     from create_svd_input import get_marks_list_from_db
     from model import connect
-    from svd.utils import frange
+    from rs_config import DATA_DIR
 
     connect()
-    logging.basicConfig(level=logging.INFO)
+    marks = get_marks_list_from_db()
+    marks_avg = sum(m for u_id, i_id, m in marks) / float(len(marks))
 
     lrate = 0.009
     acc = 10
     reg = 0.1
     factors_num = 10
     max_epochs = 5000
-    train_size = 0.7
     init_val = math.sqrt(3. / factors_num)
     deep_copy = True
     glob_epochs = 1
 
-    marks = get_marks_list_from_db()
-    train, test = train_test_split(marks, train_size=train_size)
     model = DictModel(factors_num).with_val(
-        math.sqrt(3. / factors_num)).init_from_marks_list(train)
+            init_val).init_from_marks_list(marks)
 
-    results = []
-    for glob_epochs in xrange(1, 10, 1):
-        svd = RSVD(reg=reg, acc=acc, lrate=lrate, max_epochs=max_epochs,
-                   deep_copy=deep_copy, glob_epochs=glob_epochs)
-        st = time.time()
-        tr_model = svd.train(model, train)
-        report = {
-            'lrate': lrate,
-            'acc': acc,
-            'reg': reg,
-            'fn': factors_num,
-            'dp': int(deep_copy),
-            'train': "%.5f" % tr_model.calc_rmse(train),
-            'test': "%.5f" % tr_model.calc_rmse(test),
-        }
-        results.append(report)
-
-        print 'res', report
-    for res in results:
-        print res
+    svd = RSVD(reg=reg, acc=acc, lrate=lrate, max_epochs=max_epochs,
+               deep_copy=deep_copy, glob_epochs=glob_epochs)
+    model = svd.train(model, marks)
+    model.dump(os.path.join(DATA_DIR, 'model.json'))
+    print model.calc_rmse(marks)
