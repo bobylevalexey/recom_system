@@ -39,8 +39,10 @@ def _get_filter_clause(table, filter_kwargs):
                   for col_name, val in filter_kwargs.iteritems()])
 
 
-def _get_filtered_query(session, table, filter_kwargs):
-    return session.query(table).filter(_get_filter_clause(table, filter_kwargs))
+def _get_filtered_query(session, table, filter_kwargs, columns=None):
+    columns = columns or []
+    query = session.query(table, *(getattr(table, col) for col in columns))
+    return query.filter(_get_filter_clause(table, filter_kwargs))
 
 
 def get(table, filter_kwargs, all_=False):
@@ -50,6 +52,16 @@ def get(table, filter_kwargs, all_=False):
             return query.all()
         else:
             return query.first()
+
+
+def _tuple_to_dict(tuple_, keys):
+    return {key: val for key, val in zip(keys, tuple_)}
+
+
+def get_dict(table, columns, filter_kwargs):
+    with session_scope() as sess:
+        query = _get_filtered_query(sess, table, filter_kwargs, columns)
+        return [_tuple_to_dict(tup, columns) for tup in query.all()]
 
 
 def update(table, filter_kwargs, new_kwargs):
