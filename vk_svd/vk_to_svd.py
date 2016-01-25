@@ -8,38 +8,61 @@ import numpy as np
 from svd.base import DictModel
 from rs_config import DATA_DIR
 from model import connect
-from vk_svd.features import get_features
+from vk_svd.features import get_vk_users_features
+
+
+class VkToSvd(object):
+    def __init__(self, factors_num):
+        self.factors_num = factors_num
+        self.model = LinearRegression()
+        self.vectorizer = DictVectorizer(sparse=False)
+
+    def train(self, features_dict, U_matr):
+        all_ids = set(features_dict.keys()) & set(U_matr.keys())
+        features_matr = []
+        vectors_matr = []
+        ids_dict = {}
+        for idx, id_ in enumerate(all_ids):
+            features_matr.append(features_dict[id_])
+            vectors_matr.append(U_matr[id_])
+            ids_dict[id_] = idx
+        X = self.vectorizer.fit_transform(
+            features_matr, vectors_matr)
+        _replace_nones(X, -100)
+        self.model.fit(X, vectors_matr)
+        return self.model.score(X, vectors_matr)
+
+    def get_vect_dict(self, features_dict):
+        return {
+            id_: self.get_vect(features)
+            for id_, features in features_dict.iteritems()
+        }
+
+    def get_vect(self, features):
+        vectorized_features = _replace_nones(
+            self.vectorizer.transform([features]), -100)[0]
+        return vectorized_features.dot(self.model.coef_.transpose())
 
 
 def _replace_nones(matr, val):
-    print matr.shape
     for i, j in product(xrange(matr.shape[0]), xrange(matr.shape[1])):
         if np.isnan(matr[i, j]):
             matr[i, j] = val
+    return matr
 
 if __name__ == "__main__":
+    from svd.create_svd_input import get_marks_list_from_db
     connect()
 
     model = DictModel(0)
     model.load(os.path.join(DATA_DIR, 'model.json'))
 
-    model_user_ids = model.U_matr.keys()
-    ids, features = get_features(model_user_ids)
-    print len(ids), len(features)
+    features = get_vk_users_features()
 
+    m = VkToSvd(model.factors_num)
+    m.train(features, model.U_matr)
+    m.get_vect(features.values()[0])
 
-    d = DictVectorizer(sparse=False)
-    data_set = d.fit_transform(features)
-    print data_set.shape
-    print len([model.U_matr[id_][0] for id_ in ids])
-    # exit()
-    _replace_nones(data_set, -10)
-    l = LinearRegression(normalize=False)
-
-    l.fit(data_set, [model.U_matr[id_][0] for id_ in ids])
-    #
-    # print d.get_feature_names()
-
-    # # l.fit([(1, 4)], [3])
-    print l.coef_
-    # print l.predict((1, 7))
+    new_model = DictModel(
+        model.factors_num, m.get_vect_dict(features), model.V_matr)
+    print new_model.calc_rmse(get_marks_list_from_db())

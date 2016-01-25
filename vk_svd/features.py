@@ -12,22 +12,24 @@ def to_features(dict_):
     return new_dict
 
 
-def get_features(ids=None):
+def get_vk_users_features(ids=None):
     dict_fields = get_dict(VkFeatures)
-
-    features_dict = {}
-    for dict_ in dict_fields:
-        if ids is not None and dict_['id_'] not in ids:
-            continue
-        features = to_features(dict_)
-        features_dict[dict_['id_']] = features
+    features_dict = {
+        dict_['id_']: to_features(dict_)
+        for dict_ in dict_fields if ids is None or dict_['id_'] in ids
+    }
     return features_dict
 
 
 if __name__ == "__main__":
     from model import connect
-
+    from sklearn.feature_extraction import DictVectorizer
     connect()
-    f = get_features()
+    # f = get_vk_users_features()
 
-    print '\n'.join(map(str, f.items()[:100]))
+    d = DictVectorizer()
+    d.fit_transform([{'1': 43, '2': 12}])
+    print d.get_feature_names()
+    d.fit_transform([{'4': 43, '5': 12}])
+    print d.get_feature_names()
+    # print '\n'.join(map(str, f.items()[:100]))
