@@ -1,5 +1,6 @@
 import os
 
+from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression
 
 from model import connect
@@ -17,13 +18,17 @@ if __name__ == "__main__":
     ids_with_sex = [
         id_ for id_ in features
         if features[id_]['sex'] in ['male', 'female'] and id_ in model.U_matr]
-    x = [model.U_matr[id_] for id_ in ids_with_sex]
     sex_codes = {
         'female': 1,
         'male': 0
     }
+    x = [model.U_matr[id_] for id_ in ids_with_sex]
     y = [sex_codes[features[id_]['sex']] for id_ in ids_with_sex]
 
+    x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7)
+
     l = LogisticRegression()
-    l.fit(x, y)
-    print l.predict([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    l.fit(x_train, y_train)
+
+    print (sum(abs(pr - y) for pr, y in zip(l.predict(x_test), y_test)) /
+           float(len(y_test)))
