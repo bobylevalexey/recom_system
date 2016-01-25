@@ -73,8 +73,8 @@ class DictModel(object):
         with open(file_name) as f:
             factors_num, U, V = json.load(f)
         self.factors_num = factors_num
-        self.U_matr = U
-        self.V_matr = V
+        self.U_matr = {int(id_): vect for id_, vect in U.iteritems()}
+        self.V_matr = {int(id_): vect for id_, vect in V.iteritems()}
 
     def dump(self, file_name):
         with open(file_name, 'w') as f:
