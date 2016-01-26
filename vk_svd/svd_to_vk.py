@@ -1,5 +1,6 @@
 import os
 import json
+from abc import abstractmethod, ABCMeta
 from itertools import product
 
 from sklearn.cross_validation import train_test_split
@@ -14,30 +15,57 @@ from vk_svd.features import get_vk_users_features
 from tables import FlampExpertsTable
 
 
-def logistic_model(model, features, feature, marks_counts, min_marks=0,
-                   options=None):
-    ids = [
-        id_ for id_ in features
-        if features[id_][feature] is not None and id_ in model.U_matr and
-        marks_counts[id_] >= min_marks]
+class Model(object):
+    __metaclass__ = ABCMeta
 
-    x = [model.U_matr[id_] for id_ in ids]
-    y = [features[id_][feature] for id_ in ids]
+    def __init__(self, options=None):
+        options = options or {}
+        self.model = self.create_model(**options)
 
-    x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7)
+    @staticmethod
+    def get_feature_dict(feature, svd_model, features, marks_counts,
+                         min_marks=0):
+        ids = [id_ for id_ in features
+               if features[id_][feature] is not None and
+               id_ in svd_model.U_matr and marks_counts[id_] >= min_marks]
+        return {id_: features[id_][feature] for id_ in ids}
 
-    options = options or {}
-    l = LogisticRegression(**options)
-    l.fit(x_train, y_train)
+    @abstractmethod
+    def get_err(self, x_test, y_test):
+        pass
 
-    err = (sum(pr == y for pr, y in zip(l.predict(x_test), y_test)) /
-           float(len(y_test)))
-    return {
-        'err': err,
-        'model': l,
-        'train_size': len(y_train),
-        'test_size': len(y_test),
-    }
+    @abstractmethod
+    def create_model(self, **options):
+        pass
+
+    def train(self, svd_model, features_dict, train_size=0.7):
+        """
+        svd_model and features_dict must have same keys
+        """
+        x = [svd_model.U_matr[id_] for id_ in features_dict]
+        y = [features_dict[id_] for id_ in features_dict]
+
+        x_train, x_test, y_train, y_test = train_test_split(
+                x, y, train_size=train_size)
+
+        self.model.fit(x_train, y_train)
+
+        return {
+            'err': self.get_err(x_test, y_test),
+            'train_size': len(y_train),
+            'test_size': len(y_test),
+        }
+
+
+class LogisticModel(Model):
+    def create_model(self, **options):
+        return LogisticRegression(**options)
+
+    def get_err(self, x_test, y_test):
+        return (sum(pr == y for pr, y in zip(
+                    self.model.predict(x_test), y_test)) /
+               float(len(y_test)))
+
 
 if __name__ == "__main__":
     connect()
@@ -60,8 +88,10 @@ if __name__ == "__main__":
             looking_features, min_marks_range, C_range):
         for attempt_idx in xrange(attempts):
             print attempt_idx + 1, feature, min_marks, C
-            report = logistic_model(
-                model, features, feature, user_marks, min_marks, {'C': C})
+            features_dict = Model.get_feature_dict(
+                    feature, model, features, user_marks, min_marks)
+            report = LogisticModel({'C': C}).train(model, features_dict)
+
             results.append({
                 'C': C,
                 'feature': feature,
@@ -71,5 +101,6 @@ if __name__ == "__main__":
                 'test_size': report['test_size'],
                 'err': report['err']
             })
-    with open(os.path.join(DATA_DIR, 'logistic_results.json'), 'w') as f:
-        json.dump(results, f)
+            print results[-1]
+    # with open(os.path.join(DATA_DIR, 'logistic_results.json'), 'w') as f:
+    #     json.dump(results, f)
