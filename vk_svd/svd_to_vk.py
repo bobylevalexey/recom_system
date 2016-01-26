@@ -4,8 +4,9 @@ import json
 from abc import abstractmethod, ABCMeta
 from itertools import product
 
+import math
 from sklearn.cross_validation import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, LinearRegression
 
 from model import connect, get_dict
 from rs_config import DATA_DIR
@@ -68,6 +69,18 @@ class LogisticModel(Model):
                 float(len(y_test)))
 
 
+class LinearModel(Model):
+    def create_model(self, **options):
+        return LinearRegression(**options)
+
+    def get_err(self, x_test, y_test):
+        for pr, y in zip(self.model.predict(x_test), y_test):
+            print pr, y
+        return math.sqrt((sum((pr - y)**2 for pr, y in zip(
+                              self.model.predict(x_test), y_test)) /
+                          float(len(y_test))))
+
+
 def test_feature(feature, svd_model, features, marks_counts, attempts=10,
                  C_range=None, min_marks_range=None):
     attempts = attempts
@@ -109,7 +122,7 @@ def test_sex(svd_model, marks_count):
     # костыль
     sex_dict = {d['id_']: {'sex': d['sex']}
                 for d in get_dict(FlampExpertsTable, {'id_', 'sex'})}
-    results = test_feature('sex', model, sex_dict, user_marks,
+    results = test_feature('sex', svd_model, sex_dict, user_marks,
                            min_marks_range=xrange(1, 30))
     with open(os.path.join(DATA_DIR, 'sex_logistic_regression.json'), 'w') as f:
         json.dump(results, f)
@@ -126,4 +139,8 @@ if __name__ == "__main__":
     for u_id, i_id, mark in marks:
         user_marks[u_id] = user_marks.get(u_id, 0) + 1
 
-    test_sex(model, user_marks)
+    print LinearModel().train(model, Model.get_feature_dict(
+        'age', model, features, user_marks, min_marks=5
+    ))
+
+    # test_sex(model, user_marks)
