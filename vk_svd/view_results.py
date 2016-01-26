@@ -40,15 +40,15 @@ def get_max_min_avg(results):
 
 if __name__ == "__main__":
 
-    with open(os.path.join(DATA_DIR, 'logistic_results.json')) as f:
+    with open(os.path.join(DATA_DIR, 'sex_logistic_regression.json')) as f:
         results = json.load(f)
 
     used_features = set()
     for dict_ in sorted(get_max_min_avg(results), key=lambda x: x['err']):
         if dict_['test_size'] < 20:
             continue
-        if dict_['feature'] in used_features:
-            continue
+        # if dict_['feature'] in used_features:
+        #     continue
         used_features.add(dict_['feature'])
         print '{0:<16} {1:<16} {2:<16} {3:<16} {4:<2} {5:<2} {6}'.format(
             dict_['feature'], dict_['err'], dict_['min_err'],
