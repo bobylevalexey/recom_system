@@ -1,5 +1,6 @@
 import os
 import json
+from itertools import product
 
 from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -7,6 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from model import connect, get_dict
 from rs_config import DATA_DIR
 from svd.base import DictModel
+from svd.utils import frange
 from svd.create_svd_input import get_marks_list_from_db
 from vk_svd.features import get_vk_users_features
 from tables import FlampExpertsTable
@@ -47,6 +49,27 @@ if __name__ == "__main__":
     user_marks = {}
     for u_id, i_id, mark in marks:
         user_marks[u_id] = user_marks.get(u_id, 0) + 1
+    attempts = 10
+    C_range = frange(0.1, 1., 0.1)
+    looking_features = ['political', 'life_main', 'people_main', 'alcohol',
+                        'smoking', 'relation', 'occupation_type']
+    min_marks_range = xrange(1, 15)
 
-    print logistic_model(model, features, 'life_main', user_marks, 1,
-                         {'C': 1})
+    results = []
+    for feature, min_marks, C in product(
+            looking_features, min_marks_range, C_range):
+        for attempt_idx in xrange(attempts):
+            print attempt_idx + 1, feature, min_marks, C
+            report = logistic_model(
+                model, features, feature, user_marks, min_marks, {'C': C})
+            results.append({
+                'C': C,
+                'feature': feature,
+                'min_marks': min_marks,
+                'attempt_idx': attempt_idx + 1,
+                'train_size': report['train_size'],
+                'test_size': report['test_size'],
+                'err': report['err']
+            })
+    with open(os.path.join(DATA_DIR, 'logistic_results.json'), 'w') as f:
+        json.dump(results, f)
