@@ -195,7 +195,8 @@ class FlampExpertsTable(Base):
     vk_url = sqlalchemy.Column(sqlalchemy.Text)
     page = sqlalchemy.Column(sqlalchemy.Text)
     user_name = sqlalchemy.Column(sqlalchemy.Text)
-    reviews = sqlalchemy.Column(sqlalchemy.Integer())
+    reviews = sqlalchemy.Column(sqlalchemy.Integer)
+    sex = sqlalchemy.Column(sqlalchemy.Text)
 
 
 class FlampFirmsTable(Base):
