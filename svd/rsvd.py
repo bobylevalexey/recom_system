@@ -44,7 +44,7 @@ class RSVD(object):
 
     def matr_sqr_sum(self, matr):
         return sum(sum(fact**2 for fact in vect)
-                   for vect in model.U_matr.values())
+                   for vect in self._train_model.U_matr.values())
 
     def train(self, model, marks):
         self._train_model = deepcopy(model)
