@@ -5,7 +5,7 @@ import functools
 
 from model import connect, session_scope
 from movielens.ml_tables import MLUsers, MLMovies, MLMarks
-from rs_config import DATA_DIR
+from rs_config import ML_DATA_DIR
 
 sex_dict = {
     'F': 'female',
@@ -87,12 +87,10 @@ if __name__ == "__main__":
     to_date('26-Apr-1986')
     connect()
 
-    ml_data_dir = os.path.join(DATA_DIR, 'movielens_data')
-
     load_to_table(MLUsers, USER_COLS_AND_FUNCS,
-                  os.path.join(ml_data_dir, 'users'))
+                  os.path.join(ML_DATA_DIR, 'users'))
     load_to_table(MLMovies, MOVIE_COLS_AND_FUNCS,
-                  os.path.join(ml_data_dir, 'movies'))
+                  os.path.join(ML_DATA_DIR, 'movies'))
     load_to_table(MLMarks, MARK_COLS_AND_FUNCS,
-                  os.path.join(ml_data_dir, 'marks'), sep='\t')
+                  os.path.join(ML_DATA_DIR, 'marks'), sep='\t')
 
