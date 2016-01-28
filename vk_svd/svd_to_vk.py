@@ -139,8 +139,23 @@ if __name__ == "__main__":
     for u_id, i_id, mark in marks:
         user_marks[u_id] = user_marks.get(u_id, 0) + 1
 
-    print LinearModel().train(model, Model.get_feature_dict(
-        'age', model, features, user_marks, min_marks=5
+    married_feature = {}
+    for id_ in features:
+        rel = features[id_]['relation']
+        married = None
+        if rel is not None:
+            if rel == 'married':
+                married = 1
+            elif rel != 'undef':
+                married = 0
+        if married is not None:
+            married_feature[id_] = {'married': married}
+
+    print LogisticModel().train(model, Model.get_feature_dict(
+        'married', model, married_feature, user_marks, min_marks=1
     ))
 
+    # print LinearModel().train(model, Model.get_feature_dict(
+    #     'age', model, features, user_marks, min_marks=5
+    # ))
     # test_sex(model, user_marks)
