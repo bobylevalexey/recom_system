@@ -1,5 +1,5 @@
 # coding=utf-8
-from svd.rsvd import BruteRSVD
+from flamp_vk.get_svd_model import BruteRSVD
 
 
 class StohasticRSVD(BruteRSVD):

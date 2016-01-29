@@ -1,15 +1,15 @@
 import math
+
 from sklearn.cross_validation import train_test_split
 
-from svd.base import DictModel
-from svd.rsvd import RSVD
+from flamp_vk.get_svd_model import RSVD
+from svd_model import DictModel
 
 if __name__ == "__main__":
     import time
 
-    from create_svd_input import get_marks_list_from_db
+    from get_marks import get_marks_list_from_db
     from model import connect
-    from svd.utils import frange
 
     connect()
 

@@ -70,10 +70,6 @@ if __name__ == "__main__":
     connect()
     vk_users = get_vk_jsons()
     cols = create_user_fields(vk_users.values()[0])
-    cols_counts = {col: 0 for col in cols}
     for u_id, user_dict in vk_users.iteritems():
         fields = create_user_fields(user_dict)
         insert(VkFeatures, **dict(id_=u_id, **fields))
-        for field, val in fields.iteritems():
-            if val is not None:
-                cols_counts[field] += 1

@@ -1,14 +1,14 @@
 import os
 from itertools import product
 
-from sklearn.linear_model import LinearRegression
-from sklearn.feature_extraction import DictVectorizer
 import numpy as np
-
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.linear_model import LinearRegression
 from svd.base import DictModel
-from rs_config import DATA_DIR
+
+from flamp_vk.get_vk_features import get_vk_users_features
 from model import connect
-from vk_svd.features import get_vk_users_features
+from rs_config import DATA_DIR
 
 
 class VkToSvd(object):
@@ -51,7 +51,7 @@ def _replace_nones(matr, val):
     return matr
 
 if __name__ == "__main__":
-    from svd.create_svd_input import get_marks_list_from_db
+    from flamp_vk.get_marks import get_marks_list_from_db
     connect()
 
     model = DictModel(0)

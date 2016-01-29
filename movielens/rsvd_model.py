@@ -2,14 +2,14 @@ import math
 import os
 
 from sklearn.cross_validation import train_test_split
-
-from svd.rsvd import RSVD
 from svd.base import DictModel
-from rs_config import DATA_DIR
+
+from flamp_vk.get_svd_model import RSVD
 from model import connect
 from movielens.get_marks import get_ml_marks
 from params_finder import ParamsFinder
-from svd.utils import frange
+from rs_config import DATA_DIR
+from utils import frange
 
 
 class RSVDParamsFinder(ParamsFinder):
@@ -37,8 +37,8 @@ if __name__ == "__main__":
     glob_epochs = 1
 
     ranges = {
-        'reg': frange(0.1, 0.4, 0.1),
-        'lrate': frange(0.01, 0.1, 0.01)
+        'reg': frange(0.08, 0.1, 0.01),
+        'lrate': frange(0.005, 0.01, 0.001)
     }
     static_params = {
         'acc': 1,

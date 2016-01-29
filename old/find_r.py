@@ -1,8 +1,8 @@
 import time
 
+from flamp_vk.get_marks import get_marks_list_from_db
 from model import connect
-from svd.create_svd_input import get_marks_list_from_db
-from svd.old.regularizedSVD import SvdMatrix
+from old.regularizedSVD import SvdMatrix
 
 if __name__ == "__main__":
     #========= test SvdMatrix class on smallest MovieLENS dataset =========

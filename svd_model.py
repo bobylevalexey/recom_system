@@ -1,10 +1,10 @@
 # coding=utf-8
-import json
-import random
-import math
 import functools
+import json
+import math
+import random
 
-from svd.utils import dot_product
+from utils import dot_product
 
 
 class DictModel(object):

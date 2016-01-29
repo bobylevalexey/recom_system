@@ -10,11 +10,6 @@
 
 import math
 
-from sklearn.cross_validation import train_test_split
-
-from svd.create_svd_input import get_marks_list_from_db
-from model import connect
-
 
 class Rating:
     """

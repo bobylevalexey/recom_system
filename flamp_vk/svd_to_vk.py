@@ -1,20 +1,20 @@
 # coding=utf-8
-import os
 import json
+import math
+import os
 from abc import abstractmethod, ABCMeta
 from itertools import product
 
-import math
 from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression, LinearRegression
+from svd.base import DictModel
 
+from flamp_vk.get_marks import get_marks_list_from_db
+from flamp_vk.get_vk_features import get_vk_users_features
 from model import connect, get_dict
 from rs_config import DATA_DIR
-from svd.base import DictModel
-from svd.utils import frange
-from svd.create_svd_input import get_marks_list_from_db
-from vk_svd.features import get_vk_users_features
 from tables import FlampExpertsTable
+from utils import frange
 
 
 class Model(object):

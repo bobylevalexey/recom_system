@@ -54,6 +54,10 @@ class ParamsFinder(object):
         return self._reports
 
     def dump_reports(self, file_name):
+        try:
+            with open(file_name) as f:
+                old_reports = json.load(f)
+        except IOError:
+            old_reports = []
         with open(file_name, 'w') as f:
-            json.dump(self._reports, f)
-
+            json.dump(old_reports + self._reports, f)
