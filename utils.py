@@ -34,7 +34,7 @@ def replace_nones(matr, val):
     return matr
 
 
-def get_age(born):
-    init_date = date(year=2016, month=1, day=1)
+def get_age(born, init_date=None):
+    init_date = init_date or date(year=2016, month=1, day=1)
     return init_date.year - born.year - \
            ((init_date.month, init_date.day) < (born.month, born.day))
