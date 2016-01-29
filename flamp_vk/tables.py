@@ -1,12 +1,9 @@
 # coding=utf-8
-from datetime import date
 
 import sqlalchemy
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
-Base = declarative_base()
-Session = sessionmaker(expire_on_commit=False)
+from model import Base
+from utils import get_age
 
 
 class VkInfoTable(Base):
@@ -14,11 +11,6 @@ class VkInfoTable(Base):
     id_ = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
     vk_json = sqlalchemy.Column(sqlalchemy.Text)
     vk_id = sqlalchemy.Column(sqlalchemy.Text)
-
-def _get_age(born):
-    init_date = date(year=2016, month=1, day=1)
-    return init_date.year - born.year - \
-           ((init_date.month, init_date.day) < (born.month, born.day))
 
 
 class VkFeatures(Base):
@@ -148,7 +140,7 @@ class VkFeatures(Base):
             about=None, quotes=None):
         self.id_ = id_
         self.sex = self.SEX.get(sex)
-        self.age = _get_age(bdate) if bdate is not None else None
+        self.age = get_age(bdate) if bdate is not None else None
         self.bdate = bdate
         self.relation = self.RELATION.get(relation)
         self.occupation_type = occupation_type

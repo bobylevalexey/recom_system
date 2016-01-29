@@ -1,11 +1,11 @@
 # coding=utf-8
 import os
 from contextlib import contextmanager
-import sqlalchemy
-from sqlalchemy.orm import class_mapper
-from sqlalchemy.sql.elements import and_
 
-from tables import Base, Session, FlampExpertsTable
+import sqlalchemy
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import class_mapper, sessionmaker
+from sqlalchemy.sql.elements import and_
 
 DB_FILE = os.path.join(os.path.dirname(__file__), 'data', 'db.sqlite')
 
@@ -87,3 +87,7 @@ def iterate_over_table(table, pk_col='id_'):
         pk_list = [tup[0] for tup in sess.query(getattr(table, pk_col)).all()]
     for pk in pk_list:
         yield get(table, {pk_col: pk})
+
+
+Base = declarative_base()
+Session = sessionmaker(expire_on_commit=False)

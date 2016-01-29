@@ -1,4 +1,5 @@
 import math
+from datetime import date
 from itertools import product
 
 import numpy as np
@@ -31,3 +32,9 @@ def replace_nones(matr, val):
         if np.isnan(matr[i, j]):
             matr[i, j] = val
     return matr
+
+
+def get_age(born):
+    init_date = date(year=2016, month=1, day=1)
+    return init_date.year - born.year - \
+           ((init_date.month, init_date.day) < (born.month, born.day))

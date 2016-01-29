@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 
-from tables import Base
+from model import Base
 
 
 class MLUsers(Base):

@@ -1,9 +1,9 @@
 # coding=utf-8
+import config
 from bs4 import BeautifulSoup
 
-from model import connect, iterate_over_table, update, get, insert
-from tables import FlampFirmsTable, FoodEkbFirms
-import config
+from flamp_vk.tables import FlampFirmsTable, FoodEkbFirms
+from model import connect, iterate_over_table, update, insert
 
 
 def _get_city(soup):

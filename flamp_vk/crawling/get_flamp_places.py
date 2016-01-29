@@ -1,11 +1,11 @@
+import requests
+import time
 import traceback
 
-import time
 from bs4 import BeautifulSoup
-import requests
 
+from flamp_vk.tables import FlampExpertsTable, FlampFirmsTable, FlampMarksTable
 from model import connect, insert, get, session_scope
-from tables import FlampExpertsTable, FlampFirmsTable, FlampMarksTable
 
 
 def _get_firm_id_from_url(url):

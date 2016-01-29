@@ -2,8 +2,8 @@
 import requests
 import time
 
+from flamp_vk.tables import VkInfoTable, FlampExpertsTable
 from model import session_scope
-from tables import VkInfoTable, FlampExpertsTable
 
 VK_FIELDS = [
     u'sex', u'bdate', u'city', u'country',

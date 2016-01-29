@@ -1,11 +1,8 @@
 import json
-
 import requests
 
-import time
-
+from flamp_vk.tables import VkFeatures, VkInfoTable
 from model import connect, get_dict, update
-from tables import VkFeatures, VkInfoTable
 
 
 def _get_friends_count(vk_id):

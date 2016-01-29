@@ -1,10 +1,7 @@
 # coding=utf-8
-from bs4 import BeautifulSoup
-import requests
 
+from flamp_vk.tables import FlampExpertsTable
 from model import connect, get, update, get_dict
-from tables import FlampExpertsTable
-
 
 if __name__ == "__main__":
     connect()
