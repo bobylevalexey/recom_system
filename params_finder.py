@@ -15,7 +15,6 @@ class ParamsFinder(object):
         params_names = params_ranges_dict.keys()
         params_ranges = params_ranges_dict.values()
         for params_values in product(*params_ranges):
-            print params_values
             yield {p_name: p_val
                    for p_name, p_val in zip(params_names, params_values)}
 
@@ -27,7 +26,6 @@ class ParamsFinder(object):
         self._reports = []
 
         static_params = static_params or {}
-        print model_range
         for model, model_info in model_range:
             for params in self.iterate_over_params_dict(tr_params_ranges):
                 params.update(static_params)
