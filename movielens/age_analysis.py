@@ -5,7 +5,7 @@ from sklearn.cross_validation import train_test_split
 from model import connect
 from regressions import LinearModel
 from svd_model import DictModel
-from rs_config import ML_DATA_DIR
+from movielens.config import ML_DATA_DIR
 from movielens.get_features import get_users_features
 
 if __name__ == "__main__":

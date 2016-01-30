@@ -5,7 +5,7 @@ import functools
 
 from model import connect, session_scope
 from movielens.ml_tables import MLUsers, MLMovies, MLMarks
-from rs_config import ML_DATA_DIR
+from movielens.config import ML_DATA_DIR
 
 sex_dict = {
     'F': 'female',

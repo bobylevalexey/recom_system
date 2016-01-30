@@ -19,7 +19,6 @@ FOOD_CATEGORIES = [
 ]
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
-ML_DATA_DIR = os.path.join(DATA_DIR, 'movielens_data')
 
 SVD_TRAIN_SET_FILE = os.path.join(DATA_DIR, 'svd_train.arr')
 SVD_TEST_SET_FILE = os.path.join(DATA_DIR, 'svd_test.arr')

@@ -8,7 +8,7 @@ from flamp_vk.get_svd_model import RSVD
 from model import connect
 from movielens.get_marks import get_ml_marks
 from params_finder import ParamsFinder
-from rs_config import ML_DATA_DIR
+from movielens.config import ML_DATA_DIR
 from utils import frange
 
 
