@@ -25,6 +25,10 @@ class Model(object):
     def get_err(self, x_test, y_test):
         pass
 
+    def get_err_from_dicts(self, matr_dict, features_dict, ids=None):
+        x, y = self.to_xy(matr_dict, features_dict, ids)
+        return self.get_err(x, y)
+
     @abstractmethod
     def create_model(self, **options):
         pass
