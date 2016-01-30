@@ -1,5 +1,6 @@
 import json
 import traceback
+from abc import ABCMeta, abstractmethod
 from itertools import product
 import time
 
@@ -7,9 +8,11 @@ from sklearn.cross_validation import train_test_split
 
 
 class ParamsFinder(object):
+    __metaclass__ = ABCMeta
+
     def __init__(self, attempts=10):
         self.attempts = attempts
-        self._reports = None
+        self.reports = None
 
     def iterate_over_params_dict(self, params_ranges_dict):
         params_names = params_ranges_dict.keys()
@@ -18,12 +21,17 @@ class ParamsFinder(object):
             yield {p_name: p_val
                    for p_name, p_val in zip(params_names, params_values)}
 
+    @abstractmethod
+    def get_trainer(self, cls, options):
+        pass
+
+    @abstractmethod
     def train_model(self, train_data, test_data, model, trainer):
         return {}
 
     def find(self, data, trainer_cls, model_range, tr_params_ranges,
              static_params, dump_to=None, train_size=0.7):
-        self._reports = []
+        self.reports = []
 
         static_params = static_params or {}
         for model, model_info in model_range:
@@ -34,7 +42,7 @@ class ParamsFinder(object):
                                                         params)
                     train_data, test_data = train_test_split(
                         data, train_size=train_size)
-                    trainer = trainer_cls(**params)
+                    trainer = self.get_trainer(trainer_cls, params)
                     report = dict(params)
                     report['model'] = model_info
                     report['attempt_idx'] = attempt_idx
@@ -48,10 +56,10 @@ class ParamsFinder(object):
                         report['error'] = traceback.format_exc()
 
                     print 'report', report
-                    self._reports.append(report)
+                    self.reports.append(report)
         if dump_to:
             self.dump_reports(dump_to)
-        return self._reports
+        return self.reports
 
     def dump_reports(self, file_name):
         try:
@@ -60,4 +68,4 @@ class ParamsFinder(object):
         except IOError:
             old_reports = []
         with open(file_name, 'w') as f:
-            json.dump(old_reports + self._reports, f)
+            json.dump(old_reports + self.reports, f)
