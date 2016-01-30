@@ -1,5 +1,7 @@
 import os
 
+from sklearn.cross_validation import train_test_split
+
 from model import connect
 from regressions import LinearModel, LogisticModel
 from svd_model import DictModel
@@ -14,27 +16,42 @@ OCCUPATIONS = ['administrator', 'artist', 'doctor', 'educator', 'engineer',
                'technician', 'writer']
 
 
-def check_occupation(svd, features, occupations=None):
+def check_occupation(svd, features, occupations=None, train_size=0.7):
     occupations = occupations or OCCUPATIONS
     l = LogisticModel()
     occup_dict = {}
     for id_, occup in l.get_feature_dict('occupation', ml_model.U_matr,
                                          u_features).iteritems():
         occup_dict[id_] = occup if occup in occupations else 'undef'
-    print l.train(ml_model.U_matr, occup_dict)
-    def get_err_by_occup(occupation):
+    ids_train, ids_test = train_test_split(occup_dict.keys(),
+                                           train_size=train_size)
+    print l.train(ml_model.U_matr, occup_dict, ids_train)
+    print l.get_err(*l.to_xy(ml_model.U_matr, occup_dict, ids_test))
+
+    def get_err_by_occup(occupation, ids):
         return l.get_err(*l.to_xy(ml_model.U_matr, occup_dict,
-                                  [id_ for id_, occup in occup_dict.iteritems()
-                                   if occup == occupation]))
+                                  set(id_
+                                      for id_, occup in occup_dict.iteritems()
+                                      if occup == occupation) & set(ids)))
     for occup in occupations:
-        print occup, get_err_by_occup(occup)
+        print occup, get_err_by_occup(occup, ids_train),\
+            get_err_by_occup(occup, ids_test)
 
 
-def check_singe_occup(svd, features, occupation):
+def check_singe_occup(svd, features, occupation, train_size=0.7):
     l = LogisticModel()
     is_student_feature = {id_: bool(f['occupation'] == occupation)
                           for id_, f in features.iteritems()}
-    print l.train(svd.U_matr, is_student_feature)  # err: 0.20785
+    ids_train, ids_test = train_test_split(features.keys(),
+                                           train_size=train_size)
+    print l.train(svd.U_matr, is_student_feature, ids_train)
+    print l.get_err(*l.to_xy(svd.U_matr, is_student_feature, ids_test))
+
+
+def print_sep():
+    print
+    print '-----------------'
+    print
 
 if __name__ == "__main__":
     connect()
@@ -43,5 +60,8 @@ if __name__ == "__main__":
     u_features = get_users_features()
 
     check_occupation(ml_model, u_features)
-    check_singe_occup(ml_model, u_features, 'student')
-    check_singe_occup(ml_model, u_features, 'educator')
+    print_sep()
+    for occup in OCCUPATIONS:
+        print occup
+        check_singe_occup(ml_model, u_features, occup)
+        print_sep()

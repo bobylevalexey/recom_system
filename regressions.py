@@ -34,11 +34,11 @@ class Model(object):
         return [matr_dict[id_] for id_ in ids],\
                [features_dict[id_] for id_ in ids]
 
-    def train(self, matr_dict, features_dict):
+    def train(self, matr_dict, features_dict, ids=None):
         """
         svd_model and features_dict must have same keys
         """
-        X, Y = self.to_xy(matr_dict, features_dict)
+        X, Y = self.to_xy(matr_dict, features_dict, ids)
 
         self.model.fit(X, Y)
 
