@@ -16,11 +16,10 @@ class Model(object):
         self.model = self.create_model(**options)
 
     @staticmethod
-    def get_feature_dict(feature, svd_model, features, marks_counts,
-                         min_marks=0):
+    def get_feature_dict(feature, matr_dict, features):
         return {id_: features[id_][feature] for id_ in features
                 if features[id_][feature] is not None and
-                id_ in svd_model.U_matr and marks_counts[id_] >= min_marks}
+                id_ in matr_dict}
 
     @abstractmethod
     def get_err(self, x_test, y_test):
@@ -30,12 +29,16 @@ class Model(object):
     def create_model(self, **options):
         pass
 
+    def to_xy(self, matr_dict, features_dict, ids=None):
+        ids = ids or features_dict.keys()
+        return [matr_dict[id_] for id_ in ids],\
+               [features_dict[id_] for id_ in ids]
+
     def train(self, matr_dict, features_dict):
         """
         svd_model and features_dict must have same keys
         """
-        X = [matr_dict[id_] for id_ in features_dict]
-        Y = [features_dict[id_] for id_ in features_dict]
+        X, Y = self.to_xy(matr_dict, features_dict)
 
         self.model.fit(X, Y)
 

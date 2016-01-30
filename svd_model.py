@@ -8,7 +8,7 @@ from utils import dot_product
 
 
 class DictModel(object):
-    def __init__(self, factors_num, U=None, V=None):
+    def __init__(self, factors_num=None, U=None, V=None):
         self.factors_num = factors_num
         self.U_matr = U or {}
         self.V_matr = V or {}

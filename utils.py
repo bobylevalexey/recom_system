@@ -38,3 +38,13 @@ def get_age(born, init_date=None):
     init_date = init_date or date(year=2016, month=1, day=1)
     return init_date.year - born.year - \
            ((init_date.month, init_date.day) < (born.month, born.day))
+
+
+def get_marks_counts(marks_list, by_items=False):
+    ids_idx = bool(by_items)  # marks_list = [(u_id, i_id, mark), ...]
+                              # so by_items==True, we select i_id else u_id
+    marks_counts = {}
+    for m_tup in marks_list:
+        id_ = m_tup[ids_idx]
+        marks_counts[id_] = marks_counts.get(id_, 0) + 1
+    return marks_counts
